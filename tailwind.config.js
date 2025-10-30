@@ -1,40 +1,29 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: 'class', // Enable dark mode via class
-  content: [
-    './index.html',
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
+export default {
+  darkMode: ['selector', '[data-theme="dark"]'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: '#ff9800', // Orange for your brand
-        background: {
-          DEFAULT: '#f8fafc', // Light mode background
-          dark: '#18181b',   // Dark mode background
-        },
-        text: {
-          DEFAULT: '#18181b', // Light mode text
-          dark: '#f3f4f6',   // Dark mode text
-        },
-        accent: {
-          DEFAULT: '#2563eb', // Subtle blue accent
-          dark: '#60a5fa',   // Lighter blue for dark mode
-        },
+        bg: 'var(--bg)',
+        fg: 'var(--fg)',
+        card: 'var(--card)',
+        muted: 'var(--muted)',
+        border: 'var(--border)',
+        accent: 'var(--accent)',
+        'accent-foreground': 'var(--accent-foreground)',
+        'accent-hover': 'var(--accent-hover)',
+        'accent-ring': 'var(--accent-ring)',
+      },
+      borderRadius: { xl: 'var(--radius)' },
+      boxShadow: { 
+        soft: '0 8px 24px rgba(0,0,0,0.08)',
+        'accent-ring': '0 0 0 3px var(--accent-ring)',
       },
     },
   },
-  safelist: [
-    'dark',
-    'bg-background',
-    'bg-background-dark',
-    'text-text',
-    'text-text-dark',
-    'text-primary',
-    'bg-primary',
-    'border-primary',
-    'bg-accent',
-    'bg-accent-dark',
-  ],
   plugins: [],
-}; 
+}
+
+// --- IGNORE --- 

@@ -21,14 +21,15 @@ export const ABOUT_TEXT = `I am a dedicated and versatile full stack developer w
 
 export const experiences = [
   {
-    title: "React Native Developer",
+    title: "Full Stack Developer",
     company_name: "Svipes",
     icon: svipes_logo,
     iconBg: "#383E56",
-    date: "July 2024 - November 2024",
+    date: "July 2024 - December 2024",
     points: [
-      "Developed a social media application from scratch, creating over 50+ dynamic screens to enhance user engagement and experience.",
-      "Implemented state management using Redux Toolkit to streamline data flow and optimize app performance.",
+      "Problem: Need for a scalable and performant social media app with complex UI requirements.",
+      "Solution: Developed cross-platform app using React Native and Redux Toolkit with 50+ interactive screens and reusable UI components from Figma designs.",
+      "Impact: Enhanced app performance by 30% through state optimization and asynchronous rendering strategies while improving code maintainability and scalability.",
     ],
   },
   {
@@ -36,23 +37,23 @@ export const experiences = [
     company_name: "Xelpmoc",
     icon: xelp_logo,
     iconBg: "#fff",
-    date: "November 2022 - March 2024",
+    date: "November 2022 - April 2024",
     points: [
-      "Web3 Wallet App: Implemented 30+ responsive screens using React Native for both IOS and Android, enhancing user experience across various devices. Integrated over 15 webhooks for real-time blockchain communication.",
-      "Interview Management System: Spearheaded the development of a website with React and sockets, employed WebRTC for data transfer, supporting up to 100 concurrent interviews with minimal latency.",
-      "Made SQL databases more efficient by optimizing queries using hash maps and indexing, significantly improving performance.",
+      "Problem: Multiple complex projects requiring scalable solutions - blockchain wallet, community apps, and video interview platform.",
+      "Solution: Built GreenLight Credentials Wallet App with 30+ screens and 15+ blockchain webhooks; developed community apps for 50+ residents; engineered interview platform supporting 100+ concurrent video sessions.",
+      "Impact: Cut bugs by 40%, improved development speed by 25%, and optimized SQL query latency by 86% (75s to <10s) with 4x API throughput improvement.",
     ],
   },
   {
-    title: "Internship",
+    title: "Summer Internship",
     company_name: "IIIT Hyderabad",
     icon: iith,
     iconBg: "#fff",
     date: "June 2022 - August 2022",
     points: [
-      "Utilized Python and Selenium to extract and analyze data from multiple sources, ensuring data accuracy and relevance",
-      "Applied data cleaning and transformation techniques to prepare content for publication.",
-      "Collaborated with a team to deploy 200+ articles, significantly improving regional language content on Wikipedia.",
+      "Problem: Need for efficient multilingual data extraction and processing for regional-language Wikipedia contributions.",
+      "Solution: Automated data extraction using Python and Selenium for curating multilingual datasets.",
+      "Impact: Successfully processed and cleaned 100+ articles, enhancing NLP-based emotion classification accuracy through collaboration with researchers.",
     ],
   },
 ];
@@ -60,145 +61,117 @@ export const experiences = [
 export const education = [
   {
     company_name: "University of Maryland, College Park",
-    title: "Computer Software Engineering",
+    title: "Master of Engineering, Computer Software Engineering",
     icon: umd_logo,
     iconBg: "#383E56",
-    date: "January 2025 - Present",
+    date: "January 2025 - December 2026",
     points: [
-      "Relevant Coursework: Software Engineering, Data Structures and Algorithms, Software Design & Implementation, System and Software Requirements, Software Testing & Maintenence, Cloud Computing",
+      "Minor in Cloud Engineering, focusing on advanced software development and cloud computing concepts.",
+      "Relevant coursework: Software Design, Cloud Computing, Virtualization, Cloud Security.",
+      "Gaining hands-on experience with modern software architecture and cloud-native development practices.",
     ],
   },
-  {
-    title: "Computer Science",
+   {
     company_name: "Osmania University",
+    title: "Bachelor of Engineering, Computer Science",
     icon: ou_logo,
-    iconBg: "#fff",
-    date: "August 2019 - July 2023",
+    iconBg: "#383E56",
+    date: "January 2019 - December 2023",
     points: [
-      "Web3 Wallet App: Implemented 30+ responsive screens using React Native for both IOS and Android, enhancing user experience across various devices. Integrated over 15 webhooks for real-time blockchain communication.",
-      "Interview Management System: Spearheaded the development of a website with React and sockets, employed WebRTC for data transfer, supporting up to 100 concurrent interviews with minimal latency.",
-      "Made SQL databases more efficient by optimizing queries using hash maps and indexing, significantly improving performance.",
+      "Minor in Cloud Engineering, focusing on advanced software development and cloud computing concepts.",
+      "Relevant coursework: Software Design, Cloud Computing, Virtualization, Cloud Security.",
+      "Gaining hands-on experience with modern software architecture and cloud-native development practices.",
     ],
   },
 ];
 
 export const projects = [
   {
-    name: "Automatic Poetry Generation",
+    name: "AI Chatbot for Plywood Business",
     description:
-      "Developed a prototype web application that integrated OpenCV and NLP techniques to detect facial expressions, classify them into emotional states, and generate poetry based on emotions using GPT-2. Won First Prize among 600 participants at the Project Expo in the university, highlighting its innovation and execution.",
+      "Problem: Need for efficient automation of product information queries in the plywood business.\n\nSolution: Built an internal assistant using LangChain, OpenAI, and FAISS with focus on data ingestion, embedding, vector store, and prompt design.\n\nImpact: Successfully automated product information retrieval, improving response time and accuracy for business queries.",
     tags: [
       {
-        name: "Python",
+        name: "LangChain",
         color: "text-blue-700",
       },
       {
-        name: "Mongodb",
+        name: "OpenAI",
         color: "text-green-600",
       },
       {
-        name: "OpenCv",
+        name: "FAISS",
         color: "text-pink-600",
       },
     ],
     image: meta,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/vineetagarwal54",
   },
   {
-    name: "Activity Logger",
+    name: "CollabDrawAI",
     description:
-      "Developed an app to help users log daily activities and plan schedules efficiently. I used React Native for the front end, Node.js for the back end, and SQL for the database.",
+      "Problem: Need for a real-time collaborative drawing application with multi-user support.\n\nSolution: Built an infinite canvas application with live presence, cursors, and stroke/shape broadcasting over WebSockets. Implemented batched events for optimal performance.\n\nImpact: Successfully created a smooth multi-user drawing experience with minimal network overhead using React, TypeScript, Canvas API, Node.js, and WebSockets.",
+    tags: [
+      {
+        name: "React",
+        color: "text-blue-700",
+      },
+      {
+        name: "TypeScript",
+        color: "text-green-600",
+      },
+      {
+        name: "WebSockets",
+        color: "text-pink-600",
+      },
+    ],
+    image: meta,
+    source_code_link: "https://github.com/vineetagarwal54/CollabDrawAI",
+  },
+  {
+    name: "GreenLight Credentials Wallet",
+    description:
+      "Problem: Need for a secure and user-friendly blockchain wallet with real-time updates.\n\nSolution: Developed 30+ responsive React Native screens and integrated 15+ blockchain webhooks for real-time state management.\n\nImpact: Created a seamless cross-platform experience for managing blockchain credentials with reliable real-time updates.",
     tags: [
       {
         name: "React Native",
         color: "text-blue-700",
       },
       {
-        name: "SQL",
+        name: "Blockchain",
         color: "text-green-600",
       },
       {
-        name: "Node JS",
+        name: "WebHooks",
         color: "text-pink-600",
       },
     ],
     image: ActivityLogger,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/vineetagarwal54",
   },
   {
-    name: "Interview Management System",
+    name: "Interview Management Platform",
     description:
-      "The Interview Management System is a user-friendly platform built with React, WebRTC, WebSockets, Node.js, and MongoDB that simplifies remote interviews by enabling real-time video calls, scheduling, candidate evaluation, and seamless collaboration for hiring teams.",
+      "Problem: Need for a scalable remote interviewing solution with real-time collaboration.\n\nSolution: Engineered a platform using WebRTC and WebSockets for video conferencing and real-time collaboration.\n\nImpact: Successfully scaled to 100+ concurrent video sessions with <200ms latency, providing a reliable interviewing experience.",
     tags: [
       {
         name: "React",
         color: "text-blue-700",
       },
       {
-        name: "Node JS",
+        name: "WebRTC",
         color: "text-green-600",
       },
       {
-        name: "Webrtc",
+        name: "WebSockets",
         color: "text-pink-600",
       },
     ],
     image: meta,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Tourism Website",
-    description:
-      "Explore the world with ease on this tourism website, built using React for a smooth user experience, Redux for seamless state management, and Tailwind CSS for a clean, modern design, offering destination guides, travel tips, and booking options all in one place.",
-    tags: [
-      {
-        name: "React",
-        color: "text-blue-700",
-      },
-      {
-        name: "Redux Toolkit",
-        color: "text-green-600",
-      },
-      {
-        name: "TailwindCss",
-        color: "text-pink-600",
-      },
-    ],
-    image: mpTourism,
-    source_code_link: "https://github.com/",
-  },
+    source_code_link: "https://github.com/vineetagarwal54",
+  }
 ];
 
-export const PROJECTS = [
-  {
-    title: "E-Commerce Website",
-    image: project1,
-    description:
-      "A fully functional e-commerce website with features like product listing, shopping cart, and user authentication.",
-    technologies: ["HTML", "CSS", "React", "Node.js", "MongoDB"],
-  },
-  {
-    title: "Task Management App",
-    image: project2,
-    description:
-      "An application for managing tasks and projects, with features such as task creation, assignment, and progress tracking.",
-    technologies: ["HTML", "CSS", "Angular", "Firebase"],
-  },
-  {
-    title: "Portfolio Website",
-    image: project3,
-    description:
-      "A personal portfolio website showcasing projects, skills, and contact information.",
-    technologies: ["HTML", "CSS", "React", "Bootstrap"],
-  },
-  {
-    title: "Blogging Platform",
-    image: project4,
-    description:
-      "A platform for creating and publishing blog posts, with features like rich text editing, commenting, and user profiles.",
-    technologies: ["HTML", "CSS", "Vue.js", "Express", "mySQL"],
-  },
-];
 
 export const CONTACT = {
   address: "767 Fifth Avenue, New York, NY 10153 ",

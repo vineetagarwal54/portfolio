@@ -1,0 +1,182 @@
+/* 60-30-10 Color Rule Implementation
+   60% - Primary (backgrounds, text)
+   30% - Secondary (cards, borders)
+   10% - Accent (CTAs, highlights) */
+:root {
+  /* 60% - Primary colors */
+  --bg-primary: hsl(220 25% 98%);    /* Main background */
+  --bg-primary-alt: hsl(220 25% 95%); /* Subtle background variation */
+  --fg-primary: hsl(220 25% 15%);     /* Main text */
+  
+  /* 30% - Secondary colors */
+  --bg-secondary: hsl(220 25% 92%);   /* Cards, sections */
+  --bg-secondary-alt: hsl(220 25% 90%); /* Alternative card backgrounds */
+  --fg-secondary: hsl(220 20% 45%);    /* Secondary text */
+  --border: hsl(220 25% 85%);          /* Borders */
+  
+  /* 10% - Accent colors - Orange theme */
+  --accent: #ff9800;                   /* Primary accent */
+  --accent-secondary: #f57c00;         /* Secondary accent for depth */
+  --accent-hover: #ffb74d;            /* Lighter accent for hover */
+  --accent-ring: rgba(255, 152, 0, 0.35); /* Focus rings */
+  --accent-foreground: white;          /* Text on accent backgrounds */
+
+  /* components */
+  --radius: 16px;
+
+  /* browser color scheme hint */
+  color-scheme: light;
+}
+
+/* Utility classes following 60-30-10 rule */
+/* 60% Primary */
+.bg-primary { background: var(--bg-primary) !important; }
+.bg-primary-alt { background: var(--bg-primary-alt) !important; }
+.text-primary { color: var(--fg-primary) !important; }
+
+/* 30% Secondary */
+.bg-secondary { background: var(--bg-secondary) !important; }
+.bg-secondary-alt { background: var(--bg-secondary-alt) !important; }
+.text-secondary { color: var(--fg-secondary) !important; }
+.border { border-color: var(--border) !important; }
+
+/* 10% Accent */
+.text-accent { color: var(--accent) !important; }
+.bg-accent { background: var(--accent) !important; }
+.bg-accent-secondary { background: var(--accent-secondary) !important; }
+.bg-accent-hover { background: var(--accent-hover) !important; }
+
+/* Effects */
+.shadow-soft { 
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease;
+}
+.shadow-accent-ring { 
+  box-shadow: 0 8px 32px var(--accent-ring);
+}
+
+/* Component styles using 60-30-10 rule */
+.card { 
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+.card-alt { 
+  background: var(--bg-secondary-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+/* Spacing utilities for consistent vertical rhythm */
+.section-spacing {
+  margin-top: clamp(4rem, 8vw, 8rem);
+  margin-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.section-spacing-sm {
+  margin-top: clamp(2rem, 4vw, 4rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+/* Container max-widths for different sections */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Technology brand colors (use these classes on icons) */
+.tech-react { color: #61dafb; }
+.tech-react:hover { color: #7be6ff; }
+.tech-next { color: #000000; }
+.tech-mongodb { color: #47A248; }
+.tech-redis { color: #DC382D; }
+.tech-node { color: #3C873A; }
+.tech-postgres { color: #336791; }
+.tech-typescript { color: #3178C6; }
+.tech-python { color: #3776AB; }
+.tech-android { color: #3DDC84; }
+.tech-apple { color: #000000; }
+.tech-redux { color: #764ABC; }
+.tech-cpp { color: #00599C; }
+.tech-mysql { color: #00758F; }
+.tech-selenium { color: #43B02A; }
+
+:root[data-theme="dark"] {
+  /* 60% - Primary colors */
+  --bg-primary: hsl(222 47% 11%);     /* Main background */
+  --bg-primary-alt: hsl(222 47% 13%); /* Subtle background variation */
+  --fg-primary: hsl(213 31% 91%);     /* Main text */
+  
+  /* 30% - Secondary colors */
+  --bg-secondary: hsl(223 47% 14%);   /* Cards, sections */
+  --bg-secondary-alt: hsl(222 47% 16%); /* Alternative card backgrounds */
+  --fg-secondary: hsl(215 20% 65%);    /* Secondary text */
+  --border: hsl(220 28% 23%);          /* Borders */
+  
+  /* 10% - Accent colors - Orange theme (slightly adjusted for dark mode) */
+  --accent: #ff9800;                   /* Primary accent */
+  --accent-secondary: #f57c00;         /* Secondary accent for depth */
+  --accent-hover: #ffb74d;            /* Lighter accent for hover */
+  --accent-ring: rgba(255, 152, 0, 0.25); /* Focus rings */
+  --accent-foreground: white;          /* Text on accent backgrounds */
+
+  color-scheme: dark;
+}
+
+/* Base surfaces */
+html, body { background: var(--bg); color: var(--fg); }
+
+/* Focus outlines */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-ring);
+  border-radius: 10px;
+}
+
+/* A small set of class tokens for non-Tailwind areas */
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border-radius: var(--radius);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.muted { color: var(--muted); }     

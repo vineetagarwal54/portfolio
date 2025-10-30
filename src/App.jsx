@@ -7,12 +7,13 @@ import Technologies from "./components/Technologies";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import SplashScreen from "./components/SplashScreen"; // Import the splash screen
+import SplashScreen from "./components/SplashScreen";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true); // State to track loading
-  const [selectedSection, setSelectedSection] = useState("experience"); // Default to 'experience'
-  const [splashMode, setSplashMode] = useState("full"); // 'full' or 'logo'
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedSection, setSelectedSection] = useState("experience");
+  const [splashMode, setSplashMode] = useState("full");
 
   // Decide splash mode on mount
   useEffect(() => {
@@ -36,45 +37,59 @@ const App = () => {
   };
 
   return (
-    <div className="overflow-x-hidden text-stone-300 antialiased">
+    <div className="min-h-screen overflow-x-hidden text-primary antialiased">
+      <Toaster 
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: 'var(--bg-secondary)',
+            color: 'var(--fg-primary)',
+            border: '1px solid var(--border)',
+          },
+          success: {
+            icon: '📄',
+          }
+        }}
+      />
       {/* Background */}
       <div className="fixed inset-0 -z-10">
-        <div className="relative h-full w-full bg-black">
-          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        <div className="relative h-full w-full bg-primary">
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20"></div>
+          {/* Radial Gradient */}
           <div
+            className="absolute inset-0"
             style={{
-              left: "50%",
-              transform: "translateX(-50%)", // Centers the circle horizontally
-              top: "-10%", // Keeps the vertical position unchanged
+              background: "radial-gradient(circle at 50% 0%, var(--bg-secondary-alt) 0%, transparent 75%)"
             }}
-            className="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"
           ></div>
         </div>
       </div>
 
-      {/* Conditional Rendering */}
+      {/* Content */}
       {isLoading ? (
         <SplashScreen
           onAnimationComplete={() => setIsLoading(false)}
           mode={splashMode}
         />
       ) : (
-        <div className="container mx-auto px-8">
-          {/* Navbar and Hero Section */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Navbar />
-          <Hero />
-          <Technologies />
+          <div className="space-y-32">
+            <Hero />
+            <Technologies />
 
-          {/* Section Buttons - Centered on large screens */}
-          <div className="flex justify-center mb-6 w-full max-w-[900px] mx-auto"> {/* Centered container with max width */}
-            <div className="flex border-2 border-stone-600 rounded-full overflow-hidden w-full"> {/* Button div width increased */}
-              <button
+            {/* Section Buttons */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-[900px] flex border-2 border-border rounded-full overflow-hidden shadow-soft hover:shadow-accent-ring transition-all duration-300">
+                <button
                 onClick={() => handleButtonClick("experience")}
                 className={`${
                   selectedSection === "experience"
-                    ? "bg-[#3a2f40] text-white"
-                    : "bg-transparent text-stone-300"
-                } py-3 px-6 border-r-2 border-stone-600 text-xl font-semibold transition duration-300 ease-in-out hover:bg-[#4b3746] hover:text-white w-full`} 
+                    ? "bg-accent text-accent-foreground"
+                    : "bg-transparent text-fg"
+                } py-3 px-6 border-r-2 border-border text-xl font-semibold transition duration-300 ease-in-out hover:bg-accent-hover hover:text-accent-foreground w-full focus:outline-none focus:ring-2 focus:ring-accent-ring`} 
               >
                 Experience
               </button>
@@ -82,25 +97,36 @@ const App = () => {
                 onClick={() => handleButtonClick("education")}
                 className={`${
                   selectedSection === "education"
-                    ? "bg-[#3a2f40] text-white"
-                    : "bg-transparent text-stone-300"
-                } py-3 px-6 text-xl font-semibold transition duration-300 ease-in-out hover:bg-[#4b3746] hover:text-white w-full`} 
+                    ? "bg-accent text-accent-foreground"
+                    : "bg-transparent text-fg"
+                } py-3 px-6 text-xl font-semibold transition duration-300 ease-in-out hover:bg-accent-hover hover:text-accent-foreground w-full focus:outline-none focus:ring-2 focus:ring-accent-ring`} 
               >
                 Education
               </button>
             </div>
           </div>
 
-          {/* Conditional Section Rendering */}
-          {selectedSection === "experience" ? (
-            <Experience />
-          ) : (
-            <Education />
-          )}
+            {/* Conditional Section Rendering */}
+            <div className="mt-16">
+              {selectedSection === "experience" ? (
+                <Experience />
+              ) : (
+                <Education />
+              )}
+            </div>
 
-          {/* Other Sections */}
-          <Project />
-          <Contact />
+            {/* Projects Section */}
+            <div className="mt-24">
+              <Project />
+            </div>
+
+            {/* Contact Section */}
+            <div className="mt-24">
+              <Contact />
+            </div>
+          </div>
+          
+          {/* Footer */}
           <Footer />
         </div>
       )}

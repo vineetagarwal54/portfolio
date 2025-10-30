@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
@@ -21,7 +21,7 @@ const socialLinks = [
     icon: FaInstagram,
   },
   {
-    href: "https://www.linkedin.com/in/vineet-agarwal-540abc/",
+    href: "https://twitter.com/vineetagarwal540",
     label: "X (Twitter)",
     icon: FaSquareXTwitter,
   },
@@ -29,21 +29,17 @@ const socialLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() =>
-    typeof window !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [darkMode, setDarkMode] = useState(false);
 
-  // Toggle dark mode class on <html>
+  // Toggle dark mode using data-theme attribute
   const toggleDarkMode = () => {
     setDarkMode((prev) => {
       const next = !prev;
       if (next) {
-        document.documentElement.classList.add("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
         localStorage.setItem("theme", "dark");
       } else {
-        document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
         localStorage.setItem("theme", "light");
       }
       return next;
@@ -51,22 +47,28 @@ const Navbar = () => {
   };
 
   // On mount, respect system/user preference
-  if (typeof window !== "undefined") {
-    if (localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        setDarkMode(true);
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        setDarkMode(false);
+      }
     }
-  }
+  }, []);
 
   return (
-    <nav className="w-full px-4 sm:px-8 py-4 flex items-center justify-between bg-background dark:bg-background-dark">
+    <nav className="w-full px-4 sm:px-8 py-4 flex items-center justify-between bg-bg">
       {/* Logo */}
-      <a href="/" aria-label="Home" className="flex items-center">
+      <a href="/" aria-label="Home" className="flex items-center group">
         <img
           src={logo}
-          className="h-10 w-auto sm:h-12 md:h-14 object-contain"
+          className="h-10 w-auto sm:h-12 md:h-14 object-contain group-hover:drop-shadow-[0_0_8px_var(--accent)] transition-all duration-300"
           alt="logo"
         />
       </a>
@@ -84,7 +86,7 @@ const Navbar = () => {
               aria-label={link.label}
               className="transition-colors group"
             >
-              <span className="text-text dark:text-text-dark group-hover:text-primary transition-colors">
+              <span className="text-fg group-hover:text-accent transition-colors">
                 <Icon />
               </span>
             </a>
@@ -94,7 +96,7 @@ const Navbar = () => {
         <button
           onClick={toggleDarkMode}
           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          className="ml-2 text-xl p-2 rounded-full hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-text dark:text-text-dark"
+          className="ml-2 text-xl p-2 rounded-full hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
         >
           {darkMode ? <FiSun /> : <FiMoon />}
         </button>
@@ -105,14 +107,14 @@ const Navbar = () => {
         <button
           onClick={toggleDarkMode}
           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          className="text-xl p-2 rounded-full hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-text dark:text-text-dark"
+          className="text-xl p-2 rounded-full hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
         >
           {darkMode ? <FiSun /> : <FiMoon />}
         </button>
         <button
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="text-2xl p-2 rounded-md hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-text dark:text-text-dark"
+          className="text-2xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -121,11 +123,11 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-black/60 flex flex-col items-end md:hidden">
-          <div className="w-2/3 max-w-xs h-full bg-background dark:bg-background-dark shadow-lg p-6 flex flex-col gap-6">
+          <div className="w-2/3 max-w-xs h-full card shadow-soft p-6 flex flex-col gap-6">
             <button
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
-              className="self-end text-2xl p-2 rounded-md hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary text-text dark:text-text-dark"
+              className="self-end text-2xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg"
             >
               <FiX />
             </button>
@@ -142,7 +144,7 @@ const Navbar = () => {
                     className="transition-colors group"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span className="text-text dark:text-text-dark group-hover:text-primary transition-colors flex items-center gap-2">
+                    <span className="text-fg group-hover:text-accent transition-colors flex items-center gap-2">
                       <Icon /> <span className="ml-2 text-base font-medium">{link.label}</span>
                     </span>
                   </a>

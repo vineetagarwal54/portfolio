@@ -8,8 +8,9 @@ import {
   
   const EducationCard = ({ education }) => (
     <VerticalTimelineElement
-      contentStyle={{ background: "#1d1836", color: "#fff" }}
-      contentArrowStyle={{ borderRight: "7px solid #232631" }}
+      contentStyle={{ background: "var(--bg-secondary-alt)", color: "var(--fg-primary)" }}
+      contentArrowStyle={{ borderRight: "7px solid var(--border)" }}
+      className="group"
       date={education.date}
       iconStyle={{ background: education.iconBg }}
       icon={
@@ -23,15 +24,15 @@ import {
       }
     >
       <div>
-        <h3 className="text-white text-[24px]">{education.title}</h3>
-        <p className="text-grey text-[16px] font-semibold" style={{ margin: 0 }}>
+        <h3 className="text-fg text-[24px] group-hover:text-accent transition-colors">{education.title}</h3>
+        <p className="muted text-[16px] font-semibold" style={{ margin: 0 }}>
           {education.company_name}
         </p>
         <ul className="mt-5 list-disc ml-5 space-y-2">
           {education.points.map((point, index) => (
             <li
               key={`education-point-${index}`}
-              className="text-white-100 text-[14px] pl-1 tracking-wider"
+              className="text-fg text-[14px] pl-1 tracking-wider"
             >
               {point}
             </li>

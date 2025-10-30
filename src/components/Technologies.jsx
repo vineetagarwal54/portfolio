@@ -26,9 +26,11 @@ const Technologies = () => {
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -100 }}
         transition={{ duration: 1.5 }}
-        className="my-20 text-center text-4xl"
+        className="my-20 text-center text-4xl text-fg"
       >
-        Technologies
+        <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold">
+          Technologies
+        </span>
       </motion.h2>
       <motion.div
         whileInView={{ opacity: 1, y: 0 }}
@@ -40,99 +42,113 @@ const Technologies = () => {
           initial="initial"
           animate="animate"
           variants={iconVariants(2.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <RiReactjsLine className="text-7xl text-cyan-400" />
+          <RiReactjsLine className="text-7xl tech-react transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(3)}
+          className="hover:scale-110 transition-transform"
         >
-          <TbBrandNextjs className="text-7xl" />
+          <TbBrandNextjs className="text-7xl tech-next transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(5)}
+          className="hover:scale-110 transition-transform"
         >
-          <SiMongodb className="text-7xl text-cyan-500" />
+          <SiMongodb className="text-7xl tech-mongodb transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(2)}
+          className="hover:scale-110 transition-transform"
         >
-          <DiRedis className="text-7xl text-red-700" />
+          <DiRedis className="text-7xl tech-redis transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(6)}
+          className="hover:scale-110 transition-transform"
         >
-          <FaNodeJs className="text-7xl text-green-500" />
+          <FaNodeJs className="text-7xl tech-node transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(4)}
+          className="hover:scale-110 transition-transform"
         >
-          <BiLogoPostgresql className="text-7xl text-sky-700" />
+          <BiLogoPostgresql className="text-7xl tech-postgres transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(7)}
+          className="hover:scale-110 transition-transform"
         >
-          <BiLogoTypescript className="text-7xl text-blue-500" />
+          <BiLogoTypescript className="text-7xl tech-typescript transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(5.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <DiPython className="text-7xl text-cyan-500" />
+          <DiPython className="text-7xl tech-python transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(3.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <DiAndroid className="text-7xl text-cyan-500" />
+          <DiAndroid className="text-7xl tech-android transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(2)}
+          className="hover:scale-110 transition-transform"
         >
-          <DiApple className="text-7xl text-cyan-500" />
+          <DiApple className="text-7xl tech-apple transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(4)}
+          className="hover:scale-110 transition-transform"
         >
-          <SiReduxsaga className="text-7xl text-cyan-500" />
+          <SiReduxsaga className="text-7xl tech-redux transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(2.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <SiCplusplus className="text-7xl text-cyan-400" />
+          <SiCplusplus className="text-7xl tech-cpp transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(2.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <SiMysql className="text-7xl text-cyan-400" />
+          <SiMysql className="text-7xl tech-mysql transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
           animate="animate"
           variants={iconVariants(2.5)}
+          className="hover:scale-110 transition-transform"
         >
-          <SiSelenium className="text-7xl text-cyan-400" />
+          <SiSelenium className="text-7xl tech-selenium transition-colors" />
         </motion.div>
       </motion.div>
     </div>
