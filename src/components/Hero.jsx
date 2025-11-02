@@ -5,6 +5,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { trackResumeDownload } from '../services/analytics';
+import OptimizedImage from './OptimizedImage';
 
 const containerVariants = {
   hidden: { opacity: 0, x: -200 },
@@ -37,7 +38,7 @@ const Hero = () => {
         (async () => {
           try {
             const link = document.createElement('a');
-            link.href = '/resume.pdf';
+            link.href = '/Resume1.pdf';
             link.setAttribute('download', 'Vineet_Agarwal_Resume.pdf');
             document.body.appendChild(link);
             link.click();
@@ -45,7 +46,7 @@ const Hero = () => {
             return true;
           } catch (err) {
             console.error('Programmatic download failed, fallback to opening in new tab', err);
-            window.open('/resume.pdf', '_blank', 'noopener');
+            window.open('/Resume1.pdf', '_blank', 'noopener');
             return true;
           }
         })()
@@ -73,14 +74,20 @@ const Hero = () => {
         {/* Image Container */}
         <div className="w-full flex justify-center lg:w-1/2">
           <div className="w-40 h-40 sm:w-64 sm:h-64 md:w-[340px] md:h-[340px] lg:w-[420px] lg:h-[420px] xl:w-[480px] xl:h-[480px] flex items-center justify-center overflow-hidden rounded-xl bg-secondary shadow-soft">
-            <motion.img
-              src={profilePi}
-              alt="Vineet Agarwal"
-              className="object-cover aspect-square w-full h-full"
+            <motion.div
+              className="w-full h-full"
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1.1 }}
-            />
+            >
+              <OptimizedImage
+                src={profilePi}
+                alt="Vineet Agarwal"
+                className="object-cover aspect-square w-full h-full"
+                priority={true}
+                lazy={false}
+              />
+            </motion.div>
           </div>
         </div>
 

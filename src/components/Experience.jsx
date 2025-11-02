@@ -6,7 +6,7 @@ import OptimizedImage from './OptimizedImage';
 import "react-vertical-timeline-component/style.min.css";
 import { experiences } from "../constants";
 
-const ExperienceCard = ({ experience }) => (
+const ExperienceCard = ({ experience, index }) => (
   <VerticalTimelineElement
     contentStyle={{ background: "var(--bg-secondary-alt)", color: "var(--fg-primary)" }}
     contentArrowStyle={{ borderRight: "7px solid var(--border)" }}
@@ -26,6 +26,8 @@ const ExperienceCard = ({ experience }) => (
             src={experience.icon}
             alt={experience.company_name}
             className="w-[100%] h-[100%] object-contain rounded-full"
+            priority={index < 2} // Prioritize first 2 experience images
+            lazy={index >= 2}
           />
         </a>
       </div>
@@ -57,7 +59,7 @@ const Experience = () => {
       <div className="mt-16 flex flex-col">
         <VerticalTimeline>
           {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
+            <ExperienceCard key={index} experience={experience} index={index} />
           ))}
         </VerticalTimeline>
       </div>

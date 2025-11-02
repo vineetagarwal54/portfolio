@@ -26,7 +26,7 @@ const Technologies = () => {
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -100 }}
         transition={{ duration: 1.5 }}
-        className="my-20 text-center text-4xl text-fg"
+        className="my-20 text-center text-4xl"
       >
         <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold">
           Technologies

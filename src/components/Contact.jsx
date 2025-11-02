@@ -214,7 +214,7 @@ ${form.email}`;
       icon: <RiMailFill className="text-2xl" />,
       label: "Email",
       value: "Send me a message",
-      link: `mailto:${CONTACT_EMAIL}`
+      link: `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`
     },
     {
       icon: <RiLinkedinFill className="text-2xl" />,
@@ -244,8 +244,8 @@ ${form.email}`;
       />
       
       <AnimateOnScroll>
-        <h2 className="mb-16 text-center text-4xl text-primary">
-          <span className="bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent font-bold">
+        <h2 className="mb-16 text-center text-4xl">
+          <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold">
             Get In Touch
           </span>
         </h2>
@@ -291,7 +291,9 @@ ${form.email}`;
                   I'm available for freelance work and full-time opportunities.
                 </p>
                 <a 
-                  href={`mailto:${CONTACT_EMAIL}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center text-accent hover:text-accent-secondary transition-colors"
                 >
                   <RiMailFill className="mr-2" />

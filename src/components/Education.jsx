@@ -6,7 +6,7 @@ import OptimizedImage from './OptimizedImage';
   import "react-vertical-timeline-component/style.min.css";
   import { education } from "../constants";
   
-  const EducationCard = ({ education }) => (
+  const EducationCard = ({ education, index }) => (
     <VerticalTimelineElement
       contentStyle={{ background: "var(--bg-secondary-alt)", color: "var(--fg-primary)" }}
       contentArrowStyle={{ borderRight: "7px solid var(--border)" }}
@@ -26,6 +26,8 @@ import OptimizedImage from './OptimizedImage';
               src={education.icon}
               alt={education.company_name}
               className="w-[100%] h-[100%] object-contain rounded-full"
+              priority={index < 2} // Prioritize first 2 education images
+              lazy={index >= 2}
             />
           </a>
         </div>
@@ -56,7 +58,7 @@ import OptimizedImage from './OptimizedImage';
         <div className="mt-16 flex flex-col">
           <VerticalTimeline>
             {education.map((education, index) => (
-              <EducationCard key={index} education={education} />
+              <EducationCard key={index} education={education} index={index} />
             ))}
           </VerticalTimeline>
         </div>
