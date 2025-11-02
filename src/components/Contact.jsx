@@ -123,16 +123,18 @@
 
 // export default Contact;
 import React from "react";
-import emailIcon from "../assets/emailIcon.png";
-import terminal from "../assets/terminal.png";
 import { useRef } from "react";
 import { useState } from "react";
-import { FaArrowPointer } from "react-icons/fa6";
-import { RiSendPlane2Fill, RiSendPlaneFill } from "react-icons/ri";
+import { RiSendPlaneFill, RiMailFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
 import emailjs from "@emailjs/browser";
+import toast, { Toaster } from 'react-hot-toast';
+import AnimateOnScroll from "./AnimateOnScroll";
+
+// Contact email constant
+const CONTACT_EMAIL = "vineetagarwal540@gmail.com";
 
 const Contact = () => {
-  const formRef = useRef(false);
+  const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -146,125 +148,242 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
     setLoading(true);
+    
+    // For now, let's disable EmailJS and use mailto as fallback
+    // until you set up a new EmailJS service without Gmail API issues
+    
     try {
-      await emailjs.send(
-        "service_6mqfwwv", // serviceID
-        "template_ib40hhe", // templateID
-        {
-          from_name: form.name,
-          to_name: "Vineet",
-          from_email: form.email,
-          to_email: "vineetagarwal540@gmail.com",
-          message: form.message,
-        },
-        "mQ9OON6EqrVaaw_T0" // options (public key)
-      );
+      // Create Gmail compose link instead of mailto
+      const subject = `Portfolio Contact from ${form.name}`;
+      const body = `Hi Vineet,
+
+${form.message}
+
+Best regards,
+${form.name}
+${form.email}`;
+      
+      // Use Gmail compose URL instead of mailto
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      // Open Gmail compose in new tab
+      window.open(gmailUrl, '_blank');
+      
       setLoading(false);
-      alert("Your message has been sent!");
+      toast.success("Opening Gmail... Please send the pre-filled email.");
       setForm({ name: "", email: "", message: "" });
+      
+      // Uncomment below when you fix EmailJS setup:
+      /*
+      const result = await emailjs.send(
+        "YOUR_NEW_SERVICE_ID", // Replace with new non-Gmail service
+        "YOUR_TEMPLATE_ID", // Replace with your template ID
+        {
+          user_name: form.name,
+          user_email: form.email,
+          message: form.message,
+          to_name: "Vineet",
+          reply_to: form.email,
+        },
+        "mQ9OON6EqrVaaw_T0" // Your public key
+      );
+      
+      console.log("EmailJS Success:", result);
+      setLoading(false);
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setForm({ name: "", email: "", message: "" });
+      */
+      
     } catch (error) {
       setLoading(false);
-      console.log(error);
-      alert("Something went wrong!");
+      console.error("Fallback Error:", error);
+      toast.error("Please copy your message and email me directly using the email link below.");
     }
   };
 
+  const contactInfo = [
+    {
+      icon: <RiMailFill className="text-2xl" />,
+      label: "Email",
+      value: "Send me a message",
+      link: `mailto:${CONTACT_EMAIL}`
+    },
+    {
+      icon: <RiLinkedinFill className="text-2xl" />,
+      label: "LinkedIn",
+      value: "Connect with me",
+      link: "https://www.linkedin.com/in/vineet-agarwal-540abc/"
+    },
+    {
+      icon: <RiGithubFill className="text-2xl" />,
+      label: "GitHub",
+      value: "View my projects",
+      link: "https://github.com/vineetagarwal54"
+    }
+  ];
+
   return (
-    <div className="pb-0">
-      <h2 className="my-12 text-center text-4xl sm:text-5xl text-fg">
-        <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold">
-          Contact Me
-        </span>
-      </h2>
-      <div className="relative flex items-center justify-center flex-col py-12">
-        {/* Content Container */}
-        <div className="relative z-10 w-full max-w-lg mx-auto px-5 sm:px-10 py-8 sm:py-12 card shadow-soft">
-          <h2 className="text-fg text-2xl sm:text-3xl text-center mb-4 sm:mb-6">
-            Let's talk
-          </h2>
-          <p className="text-lg sm:text-xl muted text-center mb-8 sm:mb-10">
-            Whether you're looking to build a new website or app, improve your
-            existing platform, or bring a unique project to life, I'm here to
-            help.
-          </p>
+    <div className="pb-16">
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#1f2937',
+            color: '#fff',
+          },
+        }}
+      />
+      
+      <AnimateOnScroll>
+        <h2 className="mb-16 text-center text-4xl text-primary">
+          <span className="bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent font-bold">
+            Get In Touch
+          </span>
+        </h2>
 
-          {/* Form */}
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="flex flex-col space-y-6"
-          >
-            {/* Full Name Field */}
-            <label className="space-y-2">
-              <span className="text-lg sm:text-xl muted block">
-                Full Name
-              </span>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg sm:text-xl text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border"
-                placeholder="Vineet"
-              />
-            </label>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold text-fg mb-4">Let's Connect</h3>
+                <p className="text-lg muted mb-8">
+                  I'm always interested in new opportunities and projects. 
+                  Whether you have a question or just want to say hi, feel free to reach out!
+                </p>
+              </div>
 
-            {/* Email Field */}
-            <label className="space-y-2">
-              <span className="text-lg sm:text-xl muted block">
-                Email
-              </span>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg sm:text-xl text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border"
-                placeholder="vineet@gmail.com"
-              />
-            </label>
+              {/* Contact Methods */}
+              <div className="space-y-6">
+                {contactInfo.map((contact, index) => (
+                  <a
+                    key={index}
+                    href={contact.link}
+                    target={contact.link.startsWith('http') ? '_blank' : '_self'}
+                    rel={contact.link.startsWith('http') ? 'noopener noreferrer' : ''}
+                    className="flex items-center p-4 card hover:shadow-accent-ring transition-all duration-300 group"
+                  >
+                    <div className="text-accent group-hover:text-accent-secondary transition-colors">
+                      {contact.icon}
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="text-fg font-semibold">{contact.label}</h4>
+                      <p className="muted text-sm">{contact.value}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
 
-            {/* Message Field */}
-            <label className="space-y-2">
-              <span className="text-lg sm:text-xl muted block">
-                Your message
-              </span>
-              <textarea
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg sm:text-xl text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border"
-                placeholder="Hi, I'm interested in ..."
-              />
-            </label>
+              {/* Call to Action */}
+              <div className="p-6 card bg-gradient-to-r from-accent/10 to-accent-secondary/10 border border-accent/20">
+                <h4 className="text-lg font-semibold text-fg mb-2">Ready to start a project?</h4>
+                <p className="muted text-sm mb-4">
+                  I'm available for freelance work and full-time opportunities.
+                </p>
+                <a 
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="inline-flex items-center text-accent hover:text-accent-secondary transition-colors"
+                >
+                  <RiMailFill className="mr-2" />
+                  Send me an email
+                </a>
+              </div>
+            </div>
 
-            {/* Submit Button */}
-            <button
-              className="btn-primary px-5 py-3 rounded-lg shadow-md flex justify-center items-center text-lg sm:text-xl gap-3 hover:bg-accent-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent-ring"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? "Sending ..." : "Send Message"}
-              <RiSendPlaneFill className="text-xl" />
-            </button>
-          </form>
+            {/* Contact Form */}
+            <div className="card p-6 sm:p-8">
+              <h3 className="text-2xl font-bold text-fg mb-6">Send a Message</h3>
+              
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                
+                {/* Name Field */}
+                <div>
+                  <label htmlFor="name" className="block text-lg muted mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all"
+                    placeholder="Your full name"
+                  />
+                </div>
 
-          {/* Quick contact actions */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="mailto:vineetagarwal540@gmail.com" className="px-4 py-2 rounded-lg bg-accent text-accent-foreground hover:bg-accent-hover transition-colors">
-              Email Me
-            </a>
-            <a href="https://www.linkedin.com/in/vineet-agarwal-540abc/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-secondary hover:bg-accent transition-colors">
-              Message on LinkedIn
-            </a>
+                {/* Email Field */}
+                <div>
+                  <label htmlFor="email" className="block text-lg muted mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                {/* Message Field */}
+                <div>
+                  <label htmlFor="message" className="block text-lg muted mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all resize-none"
+                    placeholder="Tell me about your project or just say hello..."
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full btn-primary px-6 py-3 rounded-lg shadow-md flex justify-center items-center text-lg gap-3 hover:bg-accent-hover transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <RiSendPlaneFill className="text-xl" />
+                    </>
+                  )}
+                </button>
+
+                <p className="text-sm muted text-center">
+                  * Required fields. I'll respond within 24 hours.
+                </p>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </AnimateOnScroll>
     </div>
   );
 };

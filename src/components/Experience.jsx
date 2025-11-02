@@ -1,8 +1,8 @@
-// // import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import OptimizedImage from './OptimizedImage';
 import "react-vertical-timeline-component/style.min.css";
 import { experiences } from "../constants";
 
@@ -15,11 +15,19 @@ const ExperienceCard = ({ experience }) => (
     iconStyle={{ background: experience.iconBg }}
     icon={
       <div className="flex justify-center items-center w-full h-full">
-        <img
-          src={experience.icon}
-          alt={experience.company_name}
-          className="w-[100%] h-[100%] object-contain rounded-full "
-        />
+        <a 
+          href={experience.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full h-full flex justify-center items-center cursor-pointer hover:scale-110 transition-transform duration-300"
+          title={`Visit ${experience.company_name} website`}
+        >
+          <OptimizedImage
+            src={experience.icon}
+            alt={experience.company_name}
+            className="w-[100%] h-[100%] object-contain rounded-full"
+          />
+        </a>
       </div>
     }
   >

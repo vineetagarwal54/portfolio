@@ -1,8 +1,8 @@
-// // import React from "react";
 import {
     VerticalTimeline,
     VerticalTimelineElement,
   } from "react-vertical-timeline-component";
+import OptimizedImage from './OptimizedImage';
   import "react-vertical-timeline-component/style.min.css";
   import { education } from "../constants";
   
@@ -15,11 +15,19 @@ import {
       iconStyle={{ background: education.iconBg }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
-          <img
-            src={education.icon}
-            alt={education.company_name}
-            className="w-[100%] h-[100%] object-contain rounded-full "
-          />
+          <a 
+            href={education.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full h-full flex justify-center items-center cursor-pointer hover:scale-110 transition-transform duration-300"
+            title={`Visit ${education.company_name} website`}
+          >
+            <OptimizedImage
+              src={education.icon}
+              alt={education.company_name}
+              className="w-[100%] h-[100%] object-contain rounded-full"
+            />
+          </a>
         </div>
       }
     >

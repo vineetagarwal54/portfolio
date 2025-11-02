@@ -16,11 +16,6 @@ const socialLinks = [
     icon: FaGithub,
   },
   {
-    href: "https://www.instagram.com/vineetagarwal540/",
-    label: "Instagram",
-    icon: FaInstagram,
-  },
-  {
     href: "https://twitter.com/vineetagarwal540",
     label: "X (Twitter)",
     icon: FaSquareXTwitter,

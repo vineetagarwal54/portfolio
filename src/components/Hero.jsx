@@ -27,21 +27,39 @@ const Hero = () => {
   const [downloading, setDownloading] = useState(false);
 
   const handleDownload = async (e) => {
-    const downloadToast = toast.loading('Preparing resume...');
+    const downloadToast = toast.loading('Downloading...');
     try {
       setDownloading(true);
       
-      // Track the download
-      const result = await trackResumeDownload();
+      // Start both operations concurrently
+      const [result, downloadSuccess] = await Promise.allSettled([
+        trackResumeDownload(),
+        (async () => {
+          try {
+            const link = document.createElement('a');
+            link.href = '/resume.pdf';
+            link.setAttribute('download', 'Vineet_Agarwal_Resume.pdf');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            return true;
+          } catch (err) {
+            console.error('Programmatic download failed, fallback to opening in new tab', err);
+            window.open('/resume.pdf', '_blank', 'noopener');
+            return true;
+          }
+        })()
+      ]);
       
-      // Small delay to show loading state
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Show success message immediately
+      if (downloadSuccess.status === 'fulfilled' && downloadSuccess.value) {
+        toast.success(
+          `Resume downloaded${result.status === 'fulfilled' && result.value ? ` (${result.value.value} downloads)` : ''}!`,
+          { id: downloadToast, duration: 2000 }
+        );
+      }
       
-      // Show success message with the download count
-      toast.success(
-        `Resume downloaded${result ? ` (${result.value} downloads)` : ''}!`,
-        { id: downloadToast }
-      );
+      return result.status === 'fulfilled' ? result.value : null;
     } catch (error) {
       console.error('Download failed:', error);
       toast.error('Download failed. Please try again.', { id: downloadToast });
@@ -90,6 +108,10 @@ const Hero = () => {
                   2000,
                   'Python Developer',
                   2000,
+                  'Cloud Enthusiast',
+                  2000,
+                  'DevOps Engineer',
+                  2000,
                 ]}
                 wrapper="span"
                 speed={50}
@@ -105,32 +127,32 @@ const Hero = () => {
               type="button"
               onClick={async (e) => {
                 e.preventDefault();
-                // perform tracking and then trigger actual download
                 await handleDownload();
-                try {
-                  const link = document.createElement('a');
-                  link.href = '/resume.pdf';
-                  link.setAttribute('download', 'Vineet_Agarwal_Resume.pdf');
-                  document.body.appendChild(link);
-                  link.click();
-                  link.remove();
-                } catch (err) {
-                  console.error('Programmatic download failed, fallback to opening in new tab', err);
-                  window.open('/resume.pdf', '_blank', 'noopener');
-                }
               }}
-              className="group bg-accent btn-primary rounded-full px-6 py-3 text-base sm:text-lg font-semibold shadow-md hover:bg-accent-hover transition-all duration-300 mb-8 mt-2 focus:outline-none focus:ring-2 focus:ring-accent-ring flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="group bg-accent btn-primary rounded-full px-6 py-3 text-base sm:text-lg font-semibold shadow-md hover:bg-accent-hover transition-colors duration-200 mb-8 mt-2 focus:outline-none focus:ring-2 focus:ring-accent-ring flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              animate={downloading ? { scale: [1, 0.98, 1], transition: { duration: 0.6, repeat: Infinity } } : {}}
             >
-              {downloading ? 'Downloading...' : (
-                <>
-                  Download Resume
-                  <svg 
-                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1"
+              <motion.span
+                initial={false}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex items-center gap-2"
+              >
+                {downloading ? 'Downloading...' : 'Download Resume'}
+                {!downloading && (
+                  <motion.svg 
+                    className="w-5 h-5"
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"
+                    animate={{ y: [0, 2, 0] }}
+                    transition={{ 
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                   >
                     <path 
                       strokeLinecap="round" 
@@ -138,9 +160,9 @@ const Hero = () => {
                       strokeWidth={2} 
                       d="M19 14l-7 7m0 0l-7-7m7 7V3" 
                     />
-                  </svg>
-                </>
-              )}
+                  </motion.svg>
+                )}
+              </motion.span>
             </motion.button>
           </motion.div>
         </div>

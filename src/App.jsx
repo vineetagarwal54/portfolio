@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Experience from "./components/Experience";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
+import ImagePreloader from "./components/ImagePreloader";
 import Project from "./components/Project";
 import Technologies from "./components/Technologies";
 import Education from "./components/Education";
@@ -38,6 +39,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden text-primary antialiased">
+      <ImagePreloader />
       <Toaster 
         position="bottom-right"
         toastOptions={{
