@@ -36,15 +36,6 @@ const Footer = () => {
             >
               <FaGithub size={20} />
             </a>
-            <a 
-              href="https://www.instagram.com/vineetagarwal540/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Instagram"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-secondary hover:bg-accent transition-colors text-fg hover:text-accent-foreground"
-            >
-              <FaInstagram size={20} />
-            </a>
           </div>
         </div>
       </div>

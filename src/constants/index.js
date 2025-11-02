@@ -11,8 +11,6 @@ import aIChatbot from "../assets/aIChatbot.png"
 
 export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `I am a dedicated and versatile full stack developer with a passion for creating efficient and user-friendly web applications. With 5 years of professional experience, I have worked with a variety of technologies, including React, Next.js, Node.js, MySQL, PostgreSQL, and MongoDB. My journey in web development began with a deep curiosity for how things work, and it has evolved into a career where I continuously strive to learn and adapt to new challenges. I thrive in collaborative environments and enjoy solving complex problems to deliver high-quality solutions. Outside of coding, I enjoy staying active, exploring new technologies, and contributing to open-source projects.`;
-
 export const experiences = [
   {
     title: "Full Stack Developer",
@@ -22,11 +20,9 @@ export const experiences = [
     date: "July 2024 - December 2024",
     website: "https://svipes.com/",
     points: [
-      "Led development of a social media app handling 10K+ daily active users with complex real-time features",
-      "Engineered a modular component library of 40+ reusable UI components, reducing development time by 45%",
-      "Optimized app load time from 4.2s to 1.8s through code splitting and lazy loading strategies",
-      "Implemented real-time notifications system processing 100K+ daily events with <100ms latency",
-      "Reduced app bundle size by 60% and improved client-side performance by 40% through state management optimization",
+      "Architected and developed a comprehensive social media platform featuring 50+ interactive screens using React Native and Redux Toolkit",
+      "Achieved significant performance improvements of 30% through advanced state optimization and asynchronous rendering techniques",
+      "Designed and implemented scalable UI component library based on Figma specifications, enhancing code maintainability and development efficiency",
     ],
   },
   {
@@ -37,11 +33,11 @@ export const experiences = [
     date: "November 2022 - April 2024",
     website: "https://www.xelpmoc.in/",
     points: [
-      "Architected and deployed blockchain wallet app processing $2M+ in monthly transactions with zero security incidents",
-      "Built community management platform serving 50+ residential societies with 15K+ active users",
-      "Developed video interview platform scaling to 100+ concurrent sessions with 99.9% uptime",
-      "Optimized database queries reducing API latency by 86% (75s to <10s) and increasing throughput by 400%",
-      "Led adoption of automated testing, achieving 90% code coverage and reducing production bugs by 65%",
+      "Developed comprehensive blockchain wallet application with 30+ responsive screens across iOS and Android platforms, seamlessly integrating 15+ blockchain webhooks for real-time data synchronization",
+      "Created dual mobile applications for senior care community management, serving 50+ residents and 20+ staff members while improving operational coordination and efficiency by 35%",
+      "Led architecture and development of tourism services platform using React and React Native, resulting in 40% bug reduction and 25% improvement in development velocity",
+      "Built scalable interview management system leveraging WebRTC and WebSocket technologies, successfully handling 100+ concurrent video sessions with sub-200ms latency",
+      "Implemented advanced database optimization strategies including query restructuring and intelligent caching, achieving 86% latency reduction (75s to <10s) and 4x API throughput improvement",
     ],
   },
   {
@@ -52,10 +48,10 @@ export const experiences = [
     date: "June 2022 - August 2022",
     website: "https://indicwiki.iiit.ac.in/",
     points: [
-      "Developed automated data extraction pipeline processing 1000+ multilingual Wikipedia articles daily",
-      "Created custom NLP models achieving 85% accuracy in regional language emotion classification",
-      "Reduced manual data processing time by 90% through intelligent automation scripts",
-      "Contributed to research paper accepted at international NLP conference with 92% positive reviewer feedback",
+      "Engineered automated multilingual data extraction pipeline using Python and Selenium, processing extensive Wikipedia datasets for regional language contributions",
+      "Developed and fine-tuned custom NLP models for emotion classification in regional languages, achieving high accuracy rates through collaborative research efforts",
+      "Streamlined data processing workflows by implementing intelligent automation scripts, significantly reducing manual intervention requirements",
+      "Contributed to academic research initiatives that resulted in publication acceptance at prestigious international NLP conferences",
     ],
   },
 ];
@@ -69,8 +65,10 @@ export const education = [
     date: "January 2025 - December 2026",
     website: "https://umd.edu/",
     points: [
-      "Minor in Cloud Security covering AWS, Azure, and GCP security best practices",
-      "Hands-on experience with containerization, microservices, and serverless architectures",
+      "Minor in Cloud Security covering AWS, Azure, and GCP security best practices with hands-on certification preparation",
+      "Extensive experience with containerization using Docker and Kubernetes, microservices architecture patterns",
+      "Advanced studies in DevOps practices, CI/CD pipelines, and Infrastructure as Code (IaC) using Terraform",
+      "Research focus on scalable system design, performance optimization, and enterprise software development",
     ],
   },
    {
@@ -174,10 +172,3 @@ export const projects = [
     source_code_link: "https://github.com/vineetagarwal54/MeetSpace",
   }
 ];
-
-
-export const CONTACT = {
-  address: "767 Fifth Avenue, New York, NY 10153 ",
-  phoneNo: "+12 4555 666 00 ",
-  email: "me@example.com",
-};
