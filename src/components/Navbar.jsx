@@ -102,14 +102,14 @@ const Navbar = () => {
         <button
           onClick={toggleDarkMode}
           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          className="text-xl p-2 rounded-full hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
+          className="text-lg p-2 rounded-full hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
         >
           {darkMode ? <FiSun /> : <FiMoon />}
         </button>
         <button
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="text-2xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
+          className="text-xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring transition-colors text-fg"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -117,16 +117,21 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 flex flex-col items-end md:hidden">
-          <div className="w-2/3 max-w-xs h-full card shadow-soft p-6 flex flex-col gap-6">
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-              className="self-end text-2xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg"
-            >
-              <FiX />
-            </button>
-            <div className="flex flex-col gap-4 mt-8 text-2xl">
+        <div className="fixed inset-0 z-40 bg-black/50 flex flex-col items-end md:hidden">
+          <div className="w-64 sm:w-72 h-full card shadow-soft p-4 flex flex-col">
+            {/* Close button */}
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="text-xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg transition-colors"
+              >
+                <FiX />
+              </button>
+            </div>
+            
+            {/* Menu Items */}
+            <div className="flex flex-col gap-3">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -136,15 +141,36 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="transition-colors group"
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors group"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span className="text-fg group-hover:text-accent transition-colors flex items-center gap-2">
-                      <Icon /> <span className="ml-2 text-base font-medium">{link.label}</span>
+                    <Icon className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                    <span className="text-base font-medium text-fg group-hover:text-accent transition-colors">
+                      {link.label}
                     </span>
                   </a>
                 );
               })}
+            </div>
+            
+            {/* Theme toggle in mobile menu */}
+            <div className="mt-6 pt-4 border-t border-border">
+              <button
+                onClick={() => {
+                  toggleDarkMode();
+                  setMenuOpen(false);
+                }}
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors group w-full text-left"
+              >
+                {darkMode ? (
+                  <FiSun className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                ) : (
+                  <FiMoon className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                )}
+                <span className="text-base font-medium text-fg group-hover:text-accent transition-colors">
+                  {darkMode ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
             </div>
           </div>
         </div>
