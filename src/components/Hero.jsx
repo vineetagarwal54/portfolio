@@ -34,40 +34,32 @@ const Hero = () => {
     try {
       setDownloading(true);
       
-      // Start both operations concurrently
-      const [result, downloadSuccess] = await Promise.allSettled([
-        trackResumeDownload(),
-        (async () => {
-          try {
-            const link = document.createElement('a');
-            link.href = '/Resume1.pdf';
-            link.setAttribute('download', 'Vineet_Agarwal_Resume.pdf');
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            return true;
-          } catch (err) {
-            console.error('Programmatic download failed, fallback to opening in new tab', err);
-            window.open('/Resume1.pdf', '_blank', 'noopener');
-            return true;
-          }
-        })()
-      ]);
-      
-      // Show success message immediately
-      if (downloadSuccess.status === 'fulfilled' && downloadSuccess.value) {
-        toast.success(
-          `Resume downloaded${result.status === 'fulfilled' && result.value ? ` (${result.value.value} downloads)` : ''}!`,
-          { id: downloadToast, duration: 2000 }
-        );
+      // Download the file immediately
+      try {
+        const link = document.createElement('a');
+        link.href = '/Resume1.pdf';
+        link.setAttribute('download', 'Vineet_Agarwal_Resume.pdf');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      } catch (err) {
+        console.error('Programmatic download failed, fallback to opening in new tab', err);
+        window.open('/Resume1.pdf', '_blank', 'noopener');
       }
       
-      return result.status === 'fulfilled' ? result.value : null;
+      // End loading state immediately after download
+      setDownloading(false);
+      toast.success('Resume downloaded!', { id: downloadToast, duration: 2000 });
+      
+      // Track analytics in background (don't wait for it)
+      trackResumeDownload().catch(err => {
+        console.error('Analytics tracking failed:', err);
+      });
+      
     } catch (error) {
       console.error('Download failed:', error);
-      toast.error('Download failed. Please try again.', { id: downloadToast });
-    } finally {
       setDownloading(false);
+      toast.error('Download failed. Please try again.', { id: downloadToast });
     }
   };
   return (
@@ -157,16 +149,7 @@ const Hero = () => {
                 ) : (
                   <>
                     Download Resume
-                    <motion.div
-                      animate={{ y: [0, 2, 0] }}
-                      transition={{ 
-                        duration: 1.5,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      <HiDownload className="w-5 h-5" />
-                    </motion.div>
+                    <HiDownload className="w-5 h-5" />
                   </>
                 )}
               </motion.span>

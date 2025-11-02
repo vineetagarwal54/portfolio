@@ -1,127 +1,3 @@
-// import React from "react";
-// import emailIcon from "../assets/emailIcon.png";
-// import terminal from "../assets/terminal.png";
-// import { useRef } from "react";
-// import { useState } from "react";
-// import { FaArrowPointer } from "react-icons/fa6";
-// import { RiSendPlane2Fill, RiSendPlaneFill } from "react-icons/ri";
-// import emailjs from "@emailjs/browser";
-
-// const Contact = () => {
-//   const formRef = useRef(false);
-//   const [loading, setLoading] = useState(false);
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
-
-//   const handleChange = ({ target: { name, value } }) => {
-//     setForm({ ...form, [name]: value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     try {
-//       await emailjs.send(
-//         "service_6mqfwwv", // serviceID
-//         "template_ib40hhe", // templateID
-//         {
-//           from_name: form.name,
-//           to_name: "Vineet",
-//           from_email: form.email,
-//           to_email: "vineetagarwal540@gmail.com",
-//           message: form.message,
-//         },
-//         "mQ9OON6EqrVaaw_T0" // options (public key)
-//       );
-//       setLoading(false);
-//       alert("Your message has been sent!");
-
-//       setForm({name:"",email:"",message:""})
-//     } catch (error) {
-//       setLoading(false);
-//       console.log(error);
-//       alert("Something went wrong!");
-//     }
-//   };
-
-//   return (
-//     <div className="pb-0">
-//       <h2 className="my-12 text-center text-4xl">Contact Me</h2>
-//       <div className="relative min-h-screen flex items-center justify-center flex-col">
-//         <img
-//           src={terminal}
-//           alt="terminal background"
-//           className="absolute inset-0 min-h-screen"
-//         />
-//         <div className="max-w-xl relative z-10 sm:px-10 px-5 mt-12">
-//           <h2 className="text-white text-2xl "> Let's talk </h2>
-//           <p className="text-lg text-gray-400 mt-3">
-//             Whether you're looking to build a new website or app, improve your
-//             existing platform, or bring a unique project to life, I'm here to
-//             help.
-//           </p>
-//           <form
-//             ref={formRef}
-//             onSubmit={handleSubmit}
-//             className="mt-12 flex flex-col space-y-7"
-//           >
-//             <label className="space-y-3  ">
-//               <span className="text-lg text-neutral-400">Full Name</span>
-//               <input
-//                 type="text"
-//                 name="name"
-//                 value={form.name}
-//                 onChange={handleChange}
-//                 required
-//                 className="w-full bg-neutral-900 px-4 py-2 min-h-14 rounded-lg placeholder:text-neutral-500 text-lg text-neutral-300 shadow-black shadow-2xl focus:outline-none"
-//                 placeholder="Vineet"
-//               />
-//             </label>
-//             <label className="space-y-3  ">
-//               <span className="text-lg text-neutral-400">Email</span>
-//               <input
-//                 type="email"
-//                 name="email"
-//                 value={form.email}
-//                 onChange={handleChange}
-//                 required
-//                 className="w-full bg-neutral-900 px-4 py-2 min-h-14 rounded-lg placeholder:text-neutral-500 text-lg text-neutral-300 shadow-black shadow-2xl focus:outline-none"
-//                 placeholder="vineet@gmail.com"
-//               />
-//             </label>
-//             <label className="space-y-3  ">
-//               <span className="text-lg text-neutral-400">Your message</span>
-//               <textarea
-//                 name="message"
-//                 value={form.message}
-//                 onChange={handleChange}
-//                 required
-//                 rows={5}
-//                 className="w-full bg-neutral-900 px-4 py-2 min-h-14 rounded-lg placeholder:text-neutral-500 text-lg text-neutral-300 shadow-black shadow-2xl focus:outline-none"
-//                 placeholder="Hi, I'm interested in ..."
-//               />
-//             </label>
-
-//             <button
-//               className="bg-zinc-800 px-5 py-2 min-h-12 rounded-lg shadow-black shadow-2xl flex justify-center items-center text-lg text-white gap-3"
-//               type="submit"
-//               disabled={loading}
-//             >
-//               {loading ? "Sending ... " : "Send Message"}
-//               <RiSendPlaneFill width={20} height={20} className="mt-1 ml-1" />
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Contact;
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
@@ -156,12 +32,9 @@ const Contact = () => {
     }
 
     setLoading(true);
-    
-    // For now, let's disable EmailJS and use mailto as fallback
-    // until you set up a new EmailJS service without Gmail API issues
+
     
     try {
-      // Create Gmail compose link instead of mailto
       const subject = `Portfolio Contact from ${form.name}`;
       const body = `Hi Vineet,
 
@@ -171,36 +44,14 @@ Best regards,
 ${form.name}
 ${form.email}`;
       
-      // Use Gmail compose URL instead of mailto
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
-      // Open Gmail compose in new tab
       window.open(gmailUrl, '_blank');
       
       setLoading(false);
       toast.success("Opening Gmail... Please send the pre-filled email.");
       setForm({ name: "", email: "", message: "" });
-      
-      // Uncomment below when you fix EmailJS setup:
-      /*
-      const result = await emailjs.send(
-        "YOUR_NEW_SERVICE_ID", // Replace with new non-Gmail service
-        "YOUR_TEMPLATE_ID", // Replace with your template ID
-        {
-          user_name: form.name,
-          user_email: form.email,
-          message: form.message,
-          to_name: "Vineet",
-          reply_to: form.email,
-        },
-        "mQ9OON6EqrVaaw_T0" // Your public key
-      );
-      
-      console.log("EmailJS Success:", result);
-      setLoading(false);
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setForm({ name: "", email: "", message: "" });
-      */
+    
       
     } catch (error) {
       setLoading(false);
