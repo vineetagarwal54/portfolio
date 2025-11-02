@@ -244,8 +244,8 @@ ${form.email}`;
       />
       
       <AnimateOnScroll>
-        <h2 className="mb-16 text-center text-4xl">
-          <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold">
+        <h2 className="mb-16 text-center text-4xl leading-tight">
+          <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold inline-block py-2">
             Get In Touch
           </span>
         </h2>

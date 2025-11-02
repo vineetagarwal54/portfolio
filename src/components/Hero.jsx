@@ -6,6 +6,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { trackResumeDownload } from '../services/analytics';
 import OptimizedImage from './OptimizedImage';
+import { HiDownload } from 'react-icons/hi';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const containerVariants = {
   hidden: { opacity: 0, x: -200 },
@@ -147,27 +149,25 @@ const Hero = () => {
                 exit={{ opacity: 0 }}
                 className="flex items-center gap-2"
               >
-                {downloading ? 'Downloading...' : 'Download Resume'}
-                {!downloading && (
-                  <motion.svg 
-                    className="w-5 h-5"
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                    animate={{ y: [0, 2, 0] }}
-                    transition={{ 
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                    />
-                  </motion.svg>
+                {downloading ? (
+                  <>
+                    Downloading...
+                    <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Download Resume
+                    <motion.div
+                      animate={{ y: [0, 2, 0] }}
+                      transition={{ 
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <HiDownload className="w-5 h-5" />
+                    </motion.div>
+                  </>
                 )}
               </motion.span>
             </motion.button>

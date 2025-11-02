@@ -117,21 +117,27 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 flex flex-col items-end md:hidden">
-          <div className="w-64 sm:w-72 h-full card shadow-soft p-4 flex flex-col">
+        <div 
+          className="fixed inset-0 z-40 bg-black/30 flex flex-col items-end md:hidden"
+          onClick={() => setMenuOpen(false)}
+        >
+          <div 
+            className="w-48 h-auto card shadow-soft p-3 m-4 flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Close button */}
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-2">
               <button
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
-                className="text-xl p-2 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg transition-colors"
+                className="text-lg p-1 rounded-md hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg transition-colors"
               >
                 <FiX />
               </button>
             </div>
             
             {/* Menu Items */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -141,11 +147,11 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors group"
+                    className="flex items-center gap-2 p-2 rounded-md hover:bg-accent/10 transition-colors group"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <Icon className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
-                    <span className="text-base font-medium text-fg group-hover:text-accent transition-colors">
+                    <Icon className="text-base text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                    <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">
                       {link.label}
                     </span>
                   </a>
@@ -154,20 +160,20 @@ const Navbar = () => {
             </div>
             
             {/* Theme toggle in mobile menu */}
-            <div className="mt-6 pt-4 border-t border-border">
+            <div className="mt-2 pt-2 border-t border-border">
               <button
                 onClick={() => {
                   toggleDarkMode();
                   setMenuOpen(false);
                 }}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors group w-full text-left"
+                className="flex items-center gap-2 p-2 rounded-md hover:bg-accent/10 transition-colors group w-full text-left"
               >
                 {darkMode ? (
-                  <FiSun className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                  <FiSun className="text-base text-fg group-hover:text-accent transition-colors flex-shrink-0" />
                 ) : (
-                  <FiMoon className="text-lg text-fg group-hover:text-accent transition-colors flex-shrink-0" />
+                  <FiMoon className="text-base text-fg group-hover:text-accent transition-colors flex-shrink-0" />
                 )}
-                <span className="text-base font-medium text-fg group-hover:text-accent transition-colors">
+                <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">
                   {darkMode ? "Light Mode" : "Dark Mode"}
                 </span>
               </button>
