@@ -3,6 +3,7 @@ import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import { trackSocialClick } from "../services/analytics";
 
 const socialLinks = [
   {
@@ -80,6 +81,7 @@ const Navbar = () => {
               rel="noopener noreferrer"
               aria-label={link.label}
               className="transition-colors group"
+              onClick={() => trackSocialClick(link.label)}
             >
               <span className="text-fg group-hover:text-accent transition-colors">
                 <Icon />
@@ -148,7 +150,10 @@ const Navbar = () => {
                     rel="noopener noreferrer"
                     aria-label={link.label}
                     className="flex items-center gap-2 p-2 rounded-md hover:bg-accent/10 transition-colors group"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      trackSocialClick(link.label);
+                      setMenuOpen(false);
+                    }}
                   >
                     <Icon className="text-base text-fg group-hover:text-accent transition-colors flex-shrink-0" />
                     <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">

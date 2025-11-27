@@ -4,6 +4,7 @@ import { useState } from "react";
 import { RiSendPlaneFill, RiMailFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
 import toast, { Toaster } from 'react-hot-toast';
 import AnimateOnScroll from "./AnimateOnScroll";
+import { trackContactFormSubmit, trackEmailClick, trackSocialClick } from "../services/analytics";
 
 // Contact email constant
 const CONTACT_EMAIL = "vineetagarwal540@gmail.com";
@@ -100,6 +101,7 @@ const Contact = () => {
 
       if (data.success) {
         recordSubmission();
+        trackContactFormSubmit(true);
         const remaining = rateLimitCheck.messagesRemaining - 1;
         toast.success(
           `Message sent successfully! I'll get back to you soon. (${remaining} message${remaining !== 1 ? 's' : ''} remaining this week)`,
@@ -107,10 +109,12 @@ const Contact = () => {
         );
         setForm({ name: "", email: "", message: "" });
       } else {
+        trackContactFormSubmit(false);
         toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
+      trackContactFormSubmit(false);
       toast.error("Failed to send message. Please email me directly.");
     } finally {
       setLoading(false);
@@ -181,6 +185,10 @@ const Contact = () => {
                     target={contact.link.startsWith('http') ? '_blank' : '_self'}
                     rel={contact.link.startsWith('http') ? 'noopener noreferrer' : ''}
                     className="flex items-center p-4 card hover:shadow-accent-ring transition-all duration-300 group"
+                    onClick={() => {
+                      if (contact.label === 'Email') trackEmailClick();
+                      else trackSocialClick(contact.label);
+                    }}
                   >
                     <div className="text-accent group-hover:text-accent-secondary transition-colors">
                       {contact.icon}
@@ -204,6 +212,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-accent hover:text-accent-secondary transition-colors"
+                  onClick={() => trackEmailClick()}
                 >
                   <RiMailFill className="mr-2" />
                   Send me an email

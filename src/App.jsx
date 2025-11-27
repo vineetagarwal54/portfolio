@@ -9,6 +9,7 @@ import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SplashScreen from "./components/SplashScreen";
+import SEO from "./components/SEO";
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden text-primary antialiased">
+      <SEO />
       <ImagePreloader />
       <Toaster 
         position="bottom-right"

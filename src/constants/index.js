@@ -9,6 +9,7 @@ import MeetSpace from "../assets/MeetSpace.png"
 import collabDraw from "../assets/collabDraw.png"
 import aIChatbot from "../assets/aIChatbot.png"
 import suntek_corp from "../assets/suntek_corp.jpg"
+import reportGen from "../assets/reportGen.png"
 import { title } from "framer-motion/client";
 
 export const HERO_CONTENT = `I build smart, fast, cloud-ready apps. My focus is where mobile meets AI — React Native on the front, FastAPI and multi-agent systems on the back, all stitched together across AWS and containerized workflows. I love turning messy problems into clean mobile experiences powered by LLMs, RAG pipelines, and MCP-style agent orchestration. Full-stack when needed, obsessive about architecture, and always pushing toward smarter, more reliable products.`;
@@ -119,7 +120,7 @@ export const projects = [
         color: "text-blue-600",
       },
     ],
-    image: aIChatbot,
+    image: reportGen,
     source_code_link: "https://github.com/vineetagarwal54/RepoResearchAI",
   },
   {

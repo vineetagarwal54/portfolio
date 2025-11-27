@@ -7,6 +7,7 @@ import github from "../assets/github.png"
 import AnimateOnScroll from "./AnimateOnScroll"
 import OptimizedImage from "./OptimizedImage"
 import { useState, useEffect } from "react"
+import { trackProjectClick } from "../services/analytics"
 
 const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -35,6 +36,7 @@ const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
           aria-label={`View ${name} on GitHub`}
           title={`Click to view ${name} on GitHub`}
           className="block w-full h-full cursor-pointer group/image"
+          onClick={() => trackProjectClick(name)}
         >
           <OptimizedImage 
             src={image} 
@@ -54,6 +56,7 @@ const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
             aria-label={`View source code for ${name}`}
             title={`View ${name} on GitHub`}
             className="bg-accent w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex justify-center items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-ring md:hover:bg-accent-hover transition-colors duration-200 shadow-lg md:hover:scale-110 md:transition-transform pointer-events-auto"
+            onClick={() => trackProjectClick(name)}
           >
             <FaGithub className="text-white text-lg sm:text-xl md:text-2xl" />
           </a>
