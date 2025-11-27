@@ -8,8 +8,10 @@ import ActivityLogger from "../assets/ActivityLogger.jpg"
 import MeetSpace from "../assets/MeetSpace.png"
 import collabDraw from "../assets/collabDraw.png"
 import aIChatbot from "../assets/aIChatbot.png"
+import suntek_corp from "../assets/suntek_corp.jpg"
+import { title } from "framer-motion/client";
 
-export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
+export const HERO_CONTENT = `I build smart, fast, cloud-ready apps. My focus is where mobile meets AI — React Native on the front, FastAPI and multi-agent systems on the back, all stitched together across AWS and containerized workflows. I love turning messy problems into clean mobile experiences powered by LLMs, RAG pipelines, and MCP-style agent orchestration. Full-stack when needed, obsessive about architecture, and always pushing toward smarter, more reliable products.`;
 
 export const experiences = [
   {
@@ -54,6 +56,18 @@ export const experiences = [
       "Contributed to academic research initiatives that resulted in publication acceptance at prestigious international NLP conferences",
     ],
   },
+  {
+    title:"Academic Mentor (Data Structures & OOP)",
+    company_name: "Suntek Organization",
+    icon: suntek_corp,
+    // iconBg: "#383E56",
+    date: "2021 - 2022",
+    website: "https://www.linkedin.com/company/suntek-corp-solutions-pvt-ltd/?originalSubdomain=at",
+    points: [
+      "Provided one-on-one mentorship to 15+ undergraduate students in Data Structures and Object-Oriented Programming (OOP) concepts, enhancing their understanding and application skills",
+"Helped students understand tricky concepts like recursion, trees, graphs, hashing, and time-complexity tradeoffs",
+      "Conducted weekly coding workshops and problem-solving sessions, fostering a collaborative learning environment and encouraging peer-to-peer knowledge sharing",    ],
+  }
 ];
 
 export const education = [
@@ -87,6 +101,27 @@ export const education = [
 ];
 
 export const projects = [
+  {
+    name: "AI Repository Analyzer",
+    description:
+      "An intelligent code analysis platform powered by multi-agent AI systems (AutoGen framework). Upload GitHub repos or ZIP files to get comprehensive architecture insights, API documentation, and database analysis from specialized AI agents (SDE, PM, QA). Features interactive chat with context-aware responses using RAG and FAISS vector search, resumable analysis sessions, and detailed technical reports. Built with FastAPI, LangChain, Streamlit, and OpenAI GPT-4.",
+    tags: [
+      {
+        name: "AutoGen",
+        color: "text-purple-600",
+      },
+      {
+        name: "LangChain",
+        color: "text-teal-600",
+      },
+      {
+        name: "FAISS",
+        color: "text-blue-600",
+      },
+    ],
+    image: aIChatbot,
+    source_code_link: "https://github.com/vineetagarwal54/RepoResearchAI",
+  },
   {
     name: "Plywood Studio AI Chatbot",
     description:

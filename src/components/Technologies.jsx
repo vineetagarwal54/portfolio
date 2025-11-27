@@ -2,7 +2,7 @@ import { BiLogoPostgresql, BiLogoTypescript } from "react-icons/bi";
 import { DiAndroid, DiApple, DiPython, DiRedis } from "react-icons/di";
 import { FaNodeJs } from "react-icons/fa";
 import { RiReactjsLine } from "react-icons/ri";
-import { SiCplusplus, SiMongodb, SiMysql, SiReduxsaga, SiSelenium } from "react-icons/si";
+import { SiCplusplus, SiMongodb, SiMysql, SiReduxsaga, SiSelenium, SiLangchain, SiOpenai, SiHuggingface,SiDocker, SiKubernetes,SiFastapi, SiApacheairflow   } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
 import { animate, motion } from "framer-motion";
 
@@ -150,6 +150,56 @@ const Technologies = () => {
         >
           <SiSelenium className="text-7xl tech-selenium transition-colors" />
         </motion.div>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(3.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiLangchain className="text-7xl tech-langchain transition-colors" />
+        </motion.div>
+        {/* <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(4.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiGooglecloud className="text-7xl tech-google transition-colors" />
+        </motion.div> */}
+        {/* <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(4.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiAmazonaws className="text-7xl tech-amazonaws transition-colors" />
+        </motion.div> */}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(4.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiDocker className="text-6xl tech-docker transition-colors" />
+        </motion.div>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(4.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiKubernetes className="text-6xl tech-kubernetes transition-colors" />
+        </motion.div>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={iconVariants(4.5)}
+          className="hover:scale-110 transition-transform"
+        >
+          <SiFastapi className="text-6xl tech-fastapi transition-colors" />
+        </motion.div>
+
+    
       </motion.div>
     </div>
   );

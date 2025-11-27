@@ -2,12 +2,15 @@ import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { RiSendPlaneFill, RiMailFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
-import emailjs from "@emailjs/browser";
 import toast, { Toaster } from 'react-hot-toast';
 import AnimateOnScroll from "./AnimateOnScroll";
 
 // Contact email constant
 const CONTACT_EMAIL = "vineetagarwal540@gmail.com";
+
+// Rate limiting constants
+const MAX_MESSAGES_PER_WEEK = 3;
+const RATE_LIMIT_KEY = 'contact_form_submissions';
 
 const Contact = () => {
   const formRef = useRef();
@@ -17,6 +20,47 @@ const Contact = () => {
     email: "",
     message: "",
   });
+
+  // Check rate limit
+  const checkRateLimit = () => {
+    const now = Date.now();
+    const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+    
+    // Get submission history from localStorage
+    const submissionsJSON = localStorage.getItem(RATE_LIMIT_KEY);
+    let submissions = submissionsJSON ? JSON.parse(submissionsJSON) : [];
+    
+    // Remove submissions older than 1 week
+    submissions = submissions.filter(timestamp => now - timestamp < oneWeek);
+    
+    // Check if limit exceeded
+    if (submissions.length >= MAX_MESSAGES_PER_WEEK) {
+      const oldestSubmission = Math.min(...submissions);
+      const timeUntilReset = oneWeek - (now - oldestSubmission);
+      const daysRemaining = Math.ceil(timeUntilReset / (24 * 60 * 60 * 1000));
+      
+      return {
+        allowed: false,
+        daysRemaining,
+        messagesUsed: submissions.length
+      };
+    }
+    
+    return {
+      allowed: true,
+      messagesRemaining: MAX_MESSAGES_PER_WEEK - submissions.length
+    };
+  };
+
+  // Record successful submission
+  const recordSubmission = () => {
+    const now = Date.now();
+    const submissionsJSON = localStorage.getItem(RATE_LIMIT_KEY);
+    let submissions = submissionsJSON ? JSON.parse(submissionsJSON) : [];
+    
+    submissions.push(now);
+    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(submissions));
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setForm({ ...form, [name]: value });
@@ -31,34 +75,48 @@ const Contact = () => {
       return;
     }
 
+    // Check rate limit
+    const rateLimitCheck = checkRateLimit();
+    if (!rateLimitCheck.allowed) {
+      toast.error(
+        `You've reached the limit of ${MAX_MESSAGES_PER_WEEK} messages per week. Please try again in ${rateLimitCheck.daysRemaining} day(s).`,
+        { duration: 6000 }
+      );
+      return;
+    }
+
     setLoading(true);
 
-    
     try {
-      const subject = `Portfolio Contact from ${form.name}`;
-      const body = `Hi Vineet,
+      const formData = new FormData(formRef.current);
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
 
-${form.message}
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
 
-Best regards,
-${form.name}
-${form.email}`;
-      
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      window.open(gmailUrl, '_blank');
-      
-      setLoading(false);
-      toast.success("Opening Gmail... Please send the pre-filled email.");
-      setForm({ name: "", email: "", message: "" });
-    
-      
+      const data = await response.json();
+
+      if (data.success) {
+        recordSubmission();
+        const remaining = rateLimitCheck.messagesRemaining - 1;
+        toast.success(
+          `Message sent successfully! I'll get back to you soon. (${remaining} message${remaining !== 1 ? 's' : ''} remaining this week)`,
+          { duration: 5000 }
+        );
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
     } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to send message. Please email me directly.");
+    } finally {
       setLoading(false);
-      console.error("Fallback Error:", error);
-      toast.error("Please copy your message and email me directly using the email link below.");
     }
   };
+
 
   const contactInfo = [
     {
