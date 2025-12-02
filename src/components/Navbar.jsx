@@ -120,11 +120,11 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/30 flex flex-col items-end md:hidden"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex flex-col items-end md:hidden"
           onClick={() => setMenuOpen(false)}
         >
           <div 
-            className="w-48 h-auto card shadow-soft p-3 m-4 flex flex-col"
+            className="w-48 h-auto bg-secondary border border-border shadow-lg p-3 m-4 flex flex-col rounded-xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}

@@ -1,40 +1,30 @@
-import ReactGA from 'react-ga4';
-
-// Initialize Google Analytics 4
-export const initGA = () => {
-  const measurementId = import.meta.env.VITE_GA4_MEASUREMENT_ID;
-  
-  if (measurementId && measurementId !== 'G-XXXXXXXXXX') {
-    ReactGA.initialize(measurementId, {
-      gaOptions: {
-        siteSpeedSampleRate: 100,
-      },
-    });
-    console.log('Google Analytics initialized');
-  } else {
-    console.warn('GA4 Measurement ID not found. Analytics disabled.');
-  }
-};
+// Google Analytics 4 helper functions
+// The gtag.js script is loaded in index.html
 
 // Track page views
 export const trackPageView = (path) => {
-  ReactGA.send({ hitType: 'pageview', page: path });
+  if (typeof window.gtag !== 'undefined') {
+    window.gtag('event', 'page_view', {
+      page_path: path,
+    });
+  }
 };
 
 // Track custom events
 export const trackEvent = (category, action, label = '', value = 0) => {
-  ReactGA.event({
-    category,
-    action,
-    label,
-    value,
-  });
+  if (typeof window.gtag !== 'undefined') {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  }
 };
 
 // Specific event trackers
 export const trackResumeDownload = async () => {
   // Track in GA4
-  trackEvent('Resume', 'Download', 'Resume PDF', 1);
+  trackEvent('Resume', 'download', 'Resume PDF', 1);
   
   // Also track using CountAPI for simple counter
   try {
@@ -47,21 +37,21 @@ export const trackResumeDownload = async () => {
 };
 
 export const trackProjectClick = (projectName) => {
-  trackEvent('Project', 'Click', projectName, 1);
+  trackEvent('Project', 'click', projectName, 1);
 };
 
 export const trackSocialClick = (platform) => {
-  trackEvent('Social', 'Click', platform, 1);
+  trackEvent('Social', 'click', platform, 1);
 };
 
 export const trackContactFormSubmit = (success = true) => {
-  trackEvent('Contact', success ? 'Submit Success' : 'Submit Failed', '', 1);
+  trackEvent('Contact', success ? 'submit_success' : 'submit_failed', '', 1);
 };
 
 export const trackEmailClick = () => {
-  trackEvent('Contact', 'Email Click', 'Direct Email', 1);
+  trackEvent('Contact', 'email_click', 'Direct Email', 1);
 };
 
 export const trackSectionView = (sectionName) => {
-  trackEvent('Navigation', 'Section View', sectionName, 1);
+  trackEvent('Navigation', 'section_view', sectionName, 1);
 };
