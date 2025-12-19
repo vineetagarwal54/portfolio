@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SplashScreen from "./components/SplashScreen";
 import SEO from "./components/SEO";
+import GitHubStats from "./components/GitHubStats";
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
@@ -43,17 +44,32 @@ const App = () => {
       <SEO />
       <ImagePreloader />
       <Toaster 
-        position="bottom-right"
+        position="top-center"
+        containerStyle={{
+          top: 100,
+          zIndex: 9999,
+        }}
         toastOptions={{
-          duration: 3000,
+          duration: 4000,
           style: {
-            background: 'var(--bg-secondary)',
-            color: 'var(--fg-primary)',
-            border: '1px solid var(--border)',
+            background: '#1f2937',
+            color: '#fff',
+            padding: '16px',
+            borderRadius: '12px',
+            fontSize: '14px',
           },
           success: {
-            icon: '📄',
-          }
+            icon: '✅',
+            style: {
+              background: '#065f46',
+            },
+          },
+          error: {
+            icon: '❌',
+            style: {
+              background: '#991b1b',
+            },
+          },
         }}
       />
       {/* Background */}
@@ -81,8 +97,13 @@ const App = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Navbar />
           <div className="space-y-32">
-            <Hero />
-            <Technologies />
+            <section id="home">
+              <Hero />
+            </section>
+            
+            <section id="technologies">
+              <Technologies />
+            </section>
 
             {/* Section Buttons */}
             <div className="flex justify-center">
@@ -111,23 +132,36 @@ const App = () => {
           </div>
 
             {/* Conditional Section Rendering */}
-            <div className="mt-16">
-              {selectedSection === "experience" ? (
-                <Experience />
-              ) : (
-                <Education />
-              )}
-            </div>
+            <section id="experience-education">
+              <div className="mt-16">
+                {selectedSection === "experience" ? (
+                  <Experience />
+                ) : (
+                  <Education />
+                )}
+              </div>
+            </section>
 
             {/* Projects Section */}
-            <div className="mt-24">
-              <Project />
-            </div>
+            <section id="projects">
+              <div className="mt-24">
+                <Project />
+              </div>
+            </section>
+
+            {/* GitHub Stats Section */}
+            <section id="github">
+              <div className="mt-24">
+                <GitHubStats />
+              </div>
+            </section>
 
             {/* Contact Section */}
-            <div className="mt-24">
-              <Contact />
-            </div>
+            <section id="contact">
+              <div className="mt-24">
+                <Contact />
+              </div>
+            </section>
           </div>
           
           {/* Footer */}

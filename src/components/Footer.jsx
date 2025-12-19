@@ -3,38 +3,31 @@ import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="mt-32 py-8 border-t border-border">
+    <footer className="mt-32 py-12 border-t border-border/30">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Copyright and Links */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-fg">
-            <p className="text-secondary">&copy; {new Date().getFullYear()} Vineet Agarwal</p>
-            <div className="flex items-center gap-4">
-              <a href="/terms" className="hover:text-accent transition-colors">Terms & Conditions</a>
-              <span className="text-border">•</span>
-              <a href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</a>
-            </div>
-          </div>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          {/* Copyright */}
+          <p className="text-fg/60 text-sm">&copy; {new Date().getFullYear()} Vineet Agarwal. Built with ☕ & 💻</p>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
+          {/* Social Links - Floating Bubbles */}
+          <div className="flex items-center gap-3">
             <a 
               href="https://www.linkedin.com/in/vineet-agarwal-540abc/" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="LinkedIn"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-secondary hover:bg-accent transition-colors text-fg hover:text-accent-foreground"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-secondary/60 backdrop-blur-sm shadow-md hover:shadow-xl hover:scale-110 hover:-rotate-6 transition-all duration-300 text-fg hover:text-accent"
             >
-              <FaLinkedin size={20} />
+              <FaLinkedin size={22} />
             </a>
             <a 
               href="https://github.com/vineetagarwal54" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-secondary hover:bg-accent transition-colors text-fg hover:text-accent-foreground"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-secondary/60 backdrop-blur-sm shadow-md hover:shadow-xl hover:scale-110 hover:rotate-6 transition-all duration-300 text-fg hover:text-accent"
             >
-              <FaGithub size={20} />
+              <FaGithub size={22} />
             </a>
           </div>
         </div>

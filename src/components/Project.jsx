@@ -28,7 +28,7 @@ const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
   
   const CardContent = () => (
     <div className={`group card card-alt p-5 rounded-xl sm:w-[360px] w-full shadow-soft hover:shadow-accent-ring transition-shadow duration-300 mb-8 mt-2 focus:outline-none focus:ring-2 focus:ring-accent-ring border-2 border-transparent hover:border-accent ${isMobile ? mobileHoverClass : ''}`}>
-      <div className="relative w-full h-[180px] sm:h-[200px] md:h-[230px] bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden" >
+      <div className="relative w-full h-[180px] sm:h-[200px] md:h-[230px] bg-secondary rounded-xl overflow-hidden" >
         <a
           href={source_code_link}
           target="_blank"
@@ -89,6 +89,12 @@ const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
 }
 
 const Project = () => {
+  const [showAll, setShowAll] = useState(false);
+  const FEATURED_COUNT = 4; // Show first 4 projects as featured
+  
+  const displayedProjects = showAll ? projects : projects.slice(0, FEATURED_COUNT);
+  const hasMore = projects.length > FEATURED_COUNT;
+  
   return (
     <div className="pb-16">
       <AnimateOnScroll>
@@ -98,11 +104,22 @@ const Project = () => {
           </span>
         </h2>
         <div className="mt-20 flex flex-wrap gap-12 justify-center" >
-            {projects.map((project,index) => (
+            {displayedProjects.map((project,index) => (
                 <ProjectCard key={`project-${index}`} index={index} {...project} />
             ))}
-
         </div>
+        
+        {/* View All / Show Less Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-4 bg-accent text-accent-foreground rounded-full font-bold shadow-lg hover:shadow-[0_8px_30px_rgba(var(--accent-rgb),0.4)] hover:scale-110 hover:-rotate-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring"
+            >
+              {showAll ? "Show Less" : `View All Projects (${projects.length})`}
+            </button>
+          </div>
+        )}
         </AnimateOnScroll>
     </div>
   )

@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { RiSendPlaneFill, RiMailFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import AnimateOnScroll from "./AnimateOnScroll";
 import { trackContactFormSubmit, trackEmailClick, trackSocialClick } from "../services/analytics";
 
@@ -145,17 +145,6 @@ const Contact = () => {
 
   return (
     <div className="pb-16">
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: '#1f2937',
-            color: '#fff',
-          },
-        }}
-      />
-      
       <AnimateOnScroll>
         <h2 className="mb-16 text-center text-4xl leading-tight">
           <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold inline-block py-2">
@@ -184,7 +173,7 @@ const Contact = () => {
                     href={contact.link}
                     target={contact.link.startsWith('http') ? '_blank' : '_self'}
                     rel={contact.link.startsWith('http') ? 'noopener noreferrer' : ''}
-                    className="flex items-center p-4 card hover:shadow-accent-ring transition-all duration-300 group"
+                    className="flex items-center p-4 rounded-2xl bg-secondary/60 backdrop-blur-sm shadow-md hover:shadow-xl hover:scale-105 hover:-rotate-1 transition-all duration-300 group"
                     onClick={() => {
                       if (contact.label === 'Email') trackEmailClick();
                       else trackSocialClick(contact.label);
@@ -281,7 +270,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full btn-primary px-6 py-3 rounded-lg shadow-md flex justify-center items-center text-lg gap-3 hover:bg-accent-hover transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-accent text-accent-foreground px-6 py-4 rounded-full shadow-lg font-bold flex justify-center items-center text-lg gap-3 hover:shadow-[0_8px_30px_rgba(var(--accent-rgb),0.4)] hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>

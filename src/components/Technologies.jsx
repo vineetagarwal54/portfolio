@@ -44,7 +44,7 @@ const Technologies = () => {
           variants={iconVariants(2.5)}
           className="hover:scale-110 transition-transform"
         >
-          <RiReactjsLine className="text-7xl tech-react transition-colors" />
+          <RiReactjsLine className="text-5xl md:text-7xl tech-react transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -52,7 +52,7 @@ const Technologies = () => {
           variants={iconVariants(3)}
           className="hover:scale-110 transition-transform"
         >
-          <TbBrandNextjs className="text-7xl tech-next transition-colors" />
+          <TbBrandNextjs className="text-5xl md:text-7xl tech-next transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -60,7 +60,7 @@ const Technologies = () => {
           variants={iconVariants(5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiMongodb className="text-7xl tech-mongodb transition-colors" />
+          <SiMongodb className="text-5xl md:text-7xl tech-mongodb transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -68,7 +68,7 @@ const Technologies = () => {
           variants={iconVariants(2)}
           className="hover:scale-110 transition-transform"
         >
-          <DiRedis className="text-7xl tech-redis transition-colors" />
+          <DiRedis className="text-5xl md:text-7xl tech-redis transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -76,7 +76,7 @@ const Technologies = () => {
           variants={iconVariants(6)}
           className="hover:scale-110 transition-transform"
         >
-          <FaNodeJs className="text-7xl tech-node transition-colors" />
+          <FaNodeJs className="text-5xl md:text-7xl tech-node transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -84,7 +84,7 @@ const Technologies = () => {
           variants={iconVariants(4)}
           className="hover:scale-110 transition-transform"
         >
-          <BiLogoPostgresql className="text-7xl tech-postgres transition-colors" />
+          <BiLogoPostgresql className="text-5xl md:text-7xl tech-postgres transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -92,7 +92,7 @@ const Technologies = () => {
           variants={iconVariants(7)}
           className="hover:scale-110 transition-transform"
         >
-          <BiLogoTypescript className="text-7xl tech-typescript transition-colors" />
+          <BiLogoTypescript className="text-5xl md:text-7xl tech-typescript transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -100,7 +100,7 @@ const Technologies = () => {
           variants={iconVariants(5.5)}
           className="hover:scale-110 transition-transform"
         >
-          <DiPython className="text-7xl tech-python transition-colors" />
+          <DiPython className="text-5xl md:text-7xl tech-python transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -108,7 +108,7 @@ const Technologies = () => {
           variants={iconVariants(3.5)}
           className="hover:scale-110 transition-transform"
         >
-          <DiAndroid className="text-7xl tech-android transition-colors" />
+          <DiAndroid className="text-5xl md:text-7xl tech-android transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -116,7 +116,7 @@ const Technologies = () => {
           variants={iconVariants(2)}
           className="hover:scale-110 transition-transform"
         >
-          <DiApple className="text-7xl tech-apple transition-colors" />
+          <DiApple className="text-5xl md:text-7xl tech-apple transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -124,7 +124,7 @@ const Technologies = () => {
           variants={iconVariants(4)}
           className="hover:scale-110 transition-transform"
         >
-          <SiReduxsaga className="text-7xl tech-redux transition-colors" />
+          <SiReduxsaga className="text-5xl md:text-7xl tech-redux transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -132,7 +132,7 @@ const Technologies = () => {
           variants={iconVariants(2.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiCplusplus className="text-7xl tech-cpp transition-colors" />
+          <SiCplusplus className="text-5xl md:text-7xl tech-cpp transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -140,7 +140,7 @@ const Technologies = () => {
           variants={iconVariants(2.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiMysql className="text-7xl tech-mysql transition-colors" />
+          <SiMysql className="text-5xl md:text-7xl tech-mysql transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -148,7 +148,7 @@ const Technologies = () => {
           variants={iconVariants(2.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiSelenium className="text-7xl tech-selenium transition-colors" />
+          <SiSelenium className="text-5xl md:text-7xl tech-selenium transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -156,7 +156,7 @@ const Technologies = () => {
           variants={iconVariants(3.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiLangchain className="text-7xl tech-langchain transition-colors" />
+          <SiLangchain className="text-5xl md:text-7xl tech-langchain transition-colors" />
         </motion.div>
         {/* <motion.div
           initial="initial"
@@ -164,7 +164,7 @@ const Technologies = () => {
           variants={iconVariants(4.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiGooglecloud className="text-7xl tech-google transition-colors" />
+          <SiGooglecloud className="text-5xl md:text-7xl tech-google transition-colors" />
         </motion.div> */}
         {/* <motion.div
           initial="initial"
@@ -172,7 +172,7 @@ const Technologies = () => {
           variants={iconVariants(4.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiAmazonaws className="text-7xl tech-amazonaws transition-colors" />
+          <SiAmazonaws className="text-5xl md:text-7xl tech-amazonaws transition-colors" />
         </motion.div> */}
         <motion.div
           initial="initial"
@@ -180,7 +180,7 @@ const Technologies = () => {
           variants={iconVariants(4.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiDocker className="text-6xl tech-docker transition-colors" />
+          <SiDocker className="text-5xl md:text-6xl tech-docker transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -188,7 +188,7 @@ const Technologies = () => {
           variants={iconVariants(4.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiKubernetes className="text-6xl tech-kubernetes transition-colors" />
+          <SiKubernetes className="text-5xl md:text-6xl tech-kubernetes transition-colors" />
         </motion.div>
         <motion.div
           initial="initial"
@@ -196,7 +196,7 @@ const Technologies = () => {
           variants={iconVariants(4.5)}
           className="hover:scale-110 transition-transform"
         >
-          <SiFastapi className="text-6xl tech-fastapi transition-colors" />
+          <SiFastapi className="text-5xl md:text-6xl tech-fastapi transition-colors" />
         </motion.div>
 
     

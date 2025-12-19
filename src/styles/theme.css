@@ -121,7 +121,7 @@
 /* Technology brand colors (use these classes on icons) */
 .tech-react { color: #61dafb; }
 .tech-react:hover { color: #7be6ff; }
-.tech-next { color: #000000; }
+.tech-next { color: var(--fg-primary); }
 .tech-mongodb { color: #47A248; }
 .tech-mongodb:hover { color: #5cb85c; }
 .tech-redis { color: #DC382D; }
@@ -136,8 +136,8 @@
 .tech-python:hover { color: #4b8bbe; }
 .tech-android { color: #3DDC84; }
 .tech-android:hover { color: #5ce89d; }
-.tech-apple { color: #000000; }
-.tech-apple:hover { color: #555555; }
+.tech-apple { color: var(--fg-primary); }
+.tech-apple:hover { color: var(--fg-secondary); }
 .tech-redux { color: #764ABC; }
 .tech-redux:hover { color: #8b5fd1; }
 .tech-cpp { color: #00599C; }

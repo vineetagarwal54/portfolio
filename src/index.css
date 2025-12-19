@@ -6,6 +6,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Offset for fixed navbar */
+  }
+  
   html, body {
     background-color: var(--bg);
     color: var(--fg);
