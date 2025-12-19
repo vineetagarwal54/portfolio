@@ -76,11 +76,11 @@ const ProjectCard = ({index,name,description,tags,image,source_code_link}) => {
   );
 
   return (
-    <motion.div variants={fadeIn("up","spring",index*0.5,0.75)} >
+    <motion.div variants={fadeIn("up","tween",index*0.1,0.4)} >
       {isMobile ? (
         <CardContent />
       ) : (
-        <Tilt options={{max:25, scale:1, speed:800}}>
+        <Tilt options={{max:15, scale:1, speed:400}}>
           <CardContent />
         </Tilt>
       )}

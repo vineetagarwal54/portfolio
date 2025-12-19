@@ -34,9 +34,8 @@ const ImagePreloader = () => {
         });
       });
 
-      Promise.allSettled(promises).then(results => {
-        const successful = results.filter(result => result.status === 'fulfilled').length;
-        console.log(`✅ Preloaded ${successful}/${criticalImages.length} critical images`);
+      Promise.allSettled(promises).then(() => {
+        // Critical images preloaded
       });
     };
 
@@ -51,9 +50,8 @@ const ImagePreloader = () => {
           });
         });
 
-        Promise.allSettled(promises).then(results => {
-          const successful = results.filter(result => result.status === 'fulfilled').length;
-          console.log(`🔄 Background loaded ${successful}/${allImages.size} secondary images`);
+        Promise.allSettled(promises).then(() => {
+          // Secondary images loaded
         });
       }, 1000); 
     };

@@ -10,20 +10,28 @@ import { HiDownload } from 'react-icons/hi';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const containerVariants = {
-  hidden: { opacity: 0, x: -200 },
+  hidden: { opacity: 0, x: -50 },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.5,
-      staggerChildren: 0.5,
+      duration: 0.4,
+      ease: [0.25, 0.1, 0.25, 1],
+      staggerChildren: 0.15,
     }
   }
 }
 
 const childVariants = {
-  hidden: { opacity: 0, x: -100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+  hidden: { opacity: 0, x: -30 },
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1]
+    } 
+  }
 }
 
 const Hero = () => {
@@ -70,9 +78,9 @@ const Hero = () => {
           <div className="w-40 h-40 sm:w-64 sm:h-64 md:w-[340px] md:h-[340px] lg:w-[420px] lg:h-[420px] xl:w-[480px] xl:h-[480px] flex items-center justify-center overflow-hidden rounded-xl bg-secondary shadow-soft">
             <motion.div
               className="w-full h-full"
-              initial={{ x: 100, opacity: 0 }}
+              initial={{ x: 40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1.1 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <OptimizedImage
                 src={profilePi}

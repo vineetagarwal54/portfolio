@@ -8,6 +8,10 @@
   --bg-primary-alt: hsl(220 25% 95%); /* Subtle background variation */
   --fg-primary: hsl(220 25% 15%);     /* Main text */
   
+  /* Aliases for convenience */
+  --bg: var(--bg-primary);
+  --fg: var(--fg-primary);
+  
   /* 30% - Secondary colors */
   --bg-secondary: hsl(220 25% 92%);   /* Cards, sections */
   --bg-secondary-alt: hsl(220 25% 90%); /* Alternative card backgrounds */
@@ -20,6 +24,9 @@
   --accent-hover: #ffb74d;            /* Lighter accent for hover */
   --accent-ring: rgba(255, 152, 0, 0.35); /* Focus rings */
   --accent-foreground: white;          /* Text on accent backgrounds */
+
+  /* RGB values for Tailwind opacity modifiers */
+  --accent-rgb: 255, 152, 0;
 
   /* components */
   --radius: 16px;
@@ -167,6 +174,10 @@
   --bg-primary-alt: hsl(222 47% 13%); /* Subtle background variation */
   --fg-primary: hsl(213 31% 91%);     /* Main text */
   
+  /* Aliases for convenience */
+  --bg: var(--bg-primary);
+  --fg: var(--fg-primary);
+  
   /* 30% - Secondary colors */
   --bg-secondary: hsl(223 47% 14%);   /* Cards, sections */
   --bg-secondary-alt: hsl(222 47% 16%); /* Alternative card backgrounds */
@@ -179,6 +190,9 @@
   --accent-hover: #ffb74d;            /* Lighter accent for hover */
   --accent-ring: rgba(255, 152, 0, 0.25); /* Focus rings */
   --accent-foreground: white;          /* Text on accent backgrounds */
+
+  /* RGB values for Tailwind opacity modifiers */
+  --accent-rgb: 255, 152, 0;
 
   color-scheme: dark;
 }

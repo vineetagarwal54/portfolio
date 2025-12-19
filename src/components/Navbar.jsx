@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
@@ -37,6 +37,40 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const dropdownRef = useRef(null);
+  const hamburgerRef = useRef(null);
+
+  // Close dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside, { passive: true });
+    document.addEventListener('keydown', handleEscape);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [menuOpen]);
 
   // Trigger entrance animations after mount
   useEffect(() => {
@@ -198,75 +232,58 @@ const Navbar = () => {
           <button
             onClick={toggleDarkMode}
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className="relative text-fg hover:text-accent focus:outline-none transition-all duration-300 hover:scale-110 text-xl w-6 h-6 flex items-center justify-center"
+            className="text-fg hover:text-accent focus:outline-none transition-colors duration-200 text-2xl"
           >
             {darkMode ? <FiSun /> : <FiMoon />}
           </button>
           <button
+            ref={hamburgerRef}
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="text-fg hover:text-accent focus:outline-none transition-all duration-300 hover:scale-110 text-xl"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="text-fg hover:text-accent focus:outline-none transition-colors duration-200 text-2xl"
           >
             {menuOpen ? <FiX /> : <FiMenu />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
-        menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}>
+      {/* Mobile Menu Dropdown */}
+      {menuOpen && (
         <div 
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-          onClick={() => setMenuOpen(false)}
-        />
-        <div 
-          className={`absolute top-4 right-4 w-72 h-auto bg-secondary/95 backdrop-blur-xl shadow-2xl p-5 flex flex-col rounded-3xl transition-all duration-500 transform ${
-            menuOpen ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-8 opacity-0 scale-95'
-          }`}
-          onClick={(e) => e.stopPropagation()}
+          id="mobile-menu"
+          ref={dropdownRef}
+          role="menu"
+          className="absolute top-full right-4 mt-2 w-64 z-[101] lg:hidden bg-secondary rounded-xl shadow-xl border border-border overflow-hidden"
+          style={{
+            animation: 'dropdown-enter 0.2s ease-out'
+          }}
         >
-            {/* Close button */}
-            <div className="flex justify-end mb-4">
-              <button
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-                className="p-2 rounded-full bg-accent/10 hover:bg-accent hover:text-accent-foreground hover:rotate-90 focus:outline-none focus:ring-2 focus:ring-accent-ring text-fg transition-all duration-300"
-              >
-                <FiX className="text-xl" />
-              </button>
-            </div>
-            
-            {/* Navigation Links - Floating Bubbles */}
-            <div className="flex flex-col gap-3 mb-4">
-              {navLinks.map((link, index) => (
+            {/* Navigation Links */}
+            <nav className="py-2" aria-label="Mobile navigation">
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
+                  role="menuitem"
                   href={link.href}
-                  className={`relative px-5 py-3 rounded-full text-sm font-bold transition-all duration-300 group text-center shadow-md hover:shadow-xl ${
+                  className={`block px-5 py-3 text-base font-medium transition-colors duration-150 ${
                     activeSection === link.href.substring(1)
-                      ? "text-accent-foreground bg-accent scale-105 shadow-[0_8px_20px_rgba(var(--accent-rgb),0.3)]"
-                      : "text-fg bg-bg hover:bg-accent/10 hover:text-accent hover:scale-105 hover:-rotate-1"
+                      ? "text-accent bg-accent/10"
+                      : "text-fg hover:text-accent hover:bg-accent/5"
                   }`}
-                  style={{ transitionDelay: `${index * 50}ms` }}
                   onClick={() => setMenuOpen(false)}
                 >
-                  {/* Glow for active */}
-                  {activeSection === link.href.substring(1) && (
-                    <span className="absolute inset-0 rounded-full bg-accent blur-lg opacity-40 animate-pulse"></span>
-                  )}
-                  
-                  {/* Text */}
-                  <span className="relative z-10">{link.name}</span>
+                  {link.name}
                 </a>
               ))}
-            </div>
+            </nav>
 
             {/* Divider */}
-            <div className="border-t border-border/30 my-3"></div>
+            <div className="h-px bg-border mx-4"></div>
             
-            {/* Social Links - Floating Bubbles */}
-            <div className="grid grid-cols-3 gap-3 mb-3">
+            {/* Social Links */}
+            <div className="flex items-center justify-center gap-5 py-4">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -276,38 +293,36 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="flex items-center justify-center p-4 rounded-full bg-bg hover:bg-accent/10 shadow-md hover:shadow-xl transition-all duration-300 group hover:scale-110 hover:-rotate-6"
+                    className="text-fg hover:text-accent transition-colors duration-150 text-xl"
                     onClick={() => {
                       trackSocialClick(link.label);
                       setMenuOpen(false);
                     }}
                   >
-                    <Icon className="text-xl text-fg group-hover:text-accent transition-all duration-300" />
+                    <Icon />
                   </a>
                 );
               })}
             </div>
+
+            {/* Divider */}
+            <div className="h-px bg-border mx-4"></div>
             
-            {/* Theme toggle in mobile menu */}
-            <button
-              onClick={() => {
-                toggleDarkMode();
-                setMenuOpen(false);
-              }}
-              className="flex items-center justify-center gap-3 px-5 py-3 rounded-full bg-bg hover:bg-accent/10 shadow-md hover:shadow-xl transition-all duration-300 group w-full hover:scale-105 hover:rotate-2"
-            >
-              {darkMode ? (
-                <FiSun className="text-xl text-fg group-hover:text-accent group-hover:rotate-180 group-hover:scale-125 transition-all duration-500 flex-shrink-0" />
-              ) : (
-                <FiMoon className="text-xl text-fg group-hover:text-accent group-hover:-rotate-12 group-hover:scale-125 transition-all duration-500 flex-shrink-0" />
-              )}
-              <span className="text-sm font-bold text-fg group-hover:text-accent transition-colors">
-                {darkMode ? "Light Mode" : "Dark Mode"}
-              </span>
-            </button>
+            {/* Theme toggle */}
+            <div className="py-2">
+              <button
+                onClick={() => {
+                  toggleDarkMode();
+                  setMenuOpen(false);
+                }}
+                className="flex items-center gap-3 w-full px-5 py-3 text-fg hover:text-accent hover:bg-accent/5 transition-colors duration-150"
+              >
+                {darkMode ? <FiSun className="text-xl" /> : <FiMoon className="text-xl" />}
+                <span className="font-medium">{darkMode ? "Light Mode" : "Dark Mode"}</span>
+              </button>
+            </div>
           </div>
-        </div>
-      {/* </div> */}
+      )}
     </nav>
   );
 };

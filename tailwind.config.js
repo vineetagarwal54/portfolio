@@ -6,12 +6,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--bg)',
-        fg: 'var(--fg)',
-        card: 'var(--card)',
-        muted: 'var(--muted)',
+        bg: 'var(--bg-primary)',
+        'bg-alt': 'var(--bg-primary-alt)',
+        fg: 'var(--fg-primary)',
+        'fg-secondary': 'var(--fg-secondary)',
+        secondary: 'var(--bg-secondary)',
+        'secondary-alt': 'var(--bg-secondary-alt)',
+        card: 'var(--bg-secondary)',
+        muted: 'var(--fg-secondary)',
         border: 'var(--border)',
         accent: 'var(--accent)',
+        'accent-secondary': 'var(--accent-secondary)',
         'accent-foreground': 'var(--accent-foreground)',
         'accent-hover': 'var(--accent-hover)',
         'accent-ring': 'var(--accent-ring)',
