@@ -10,6 +10,8 @@ import collabDraw from "../assets/collabDraw.png"
 import aIChatbot from "../assets/aIChatbot.png"
 import suntek_corp from "../assets/suntek_corp.jpg"
 import reportGen from "../assets/reportGen.png"
+import terrapinEvents from "../assets/terrapinEvents.png"
+import videoAnalytics from "../assets/videoAnalytics.png"
 import { title } from "framer-motion/client";
 
 export const HERO_CONTENT = `I build smart, fast, cloud-ready apps. My focus is where mobile meets AI — React Native on the front, FastAPI and multi-agent systems on the back, all stitched together across AWS and containerized workflows. I love turning messy problems into clean mobile experiences powered by LLMs, RAG pipelines, and MCP-style agent orchestration. Full-stack when needed, obsessive about architecture, and always pushing toward smarter, more reliable products.`;
@@ -102,6 +104,48 @@ export const education = [
 ];
 
 export const projects = [
+  {
+    name: "Terrapin Events - Campus Event Management",
+    description:
+      "Enterprise-grade event management platform for University of Maryland campus. Architected full-stack solution with React frontend, FastAPI backend, and MongoDB database deployed on Kubernetes cluster. Implemented CAS SSO authentication with JWT RBAC, automated waitlist management, Stripe payment integration with webhooks, email notification system, and calendar integration. Collaborated in agile team environment with CI/CD pipelines, achieving 100+ concurrent user capacity and sub-200ms API response times.",
+    tags: [
+      {
+        name: "Kubernetes",
+        color: "text-blue-600",
+      },
+      {
+        name: "FastAPI",
+        color: "text-green-600",
+      },
+      {
+        name: "MongoDB",
+        color: "text-orange-600",
+      },
+    ],
+    image: terrapinEvents,
+    source_code_link: "https://github.com/bhavnakumari/enpm613-team4-terrapin-events",
+  },
+  {
+    name: "AWS Video Analytics Streaming Platform",
+    description:
+      "Cloud-native video analytics platform on AWS EKS with microservices architecture. Engineered serverless backend using 3 Lambda functions (uploader, processor, analytics) integrated with S3, DynamoDB, SQS, API Gateway, and AppSync GraphQL. Containerized React frontend deployed on EKS with auto-scaling (2-10 pods), Application Load Balancer, and CloudFront CDN. Implemented comprehensive infrastructure-as-code using CloudFormation templates, automated CI/CD with GitHub Actions, network policies, RBAC, and security scanning achieving zero critical vulnerabilities.",
+    tags: [
+      {
+        name: "AWS Lambda",
+        color: "text-orange-500",
+      },
+      {
+        name: "EKS",
+        color: "text-blue-600",
+      },
+      {
+        name: "CloudFormation",
+        color: "text-purple-600",
+      },
+    ],
+    image: videoAnalytics,
+    source_code_link: "https://github.com/Divyesh4683/AWS-Video-Analytics-Streaming-Dashboard",
+  },
   {
     name: "AI Repository Analyzer",
     description:
