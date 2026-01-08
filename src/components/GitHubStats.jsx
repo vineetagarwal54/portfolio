@@ -1,6 +1,48 @@
+import { useState } from "react";
 import AnimateOnScroll from "./AnimateOnScroll";
 
 const GITHUB_USERNAME = "vineetagarwal54";
+
+// Fallback component when image fails to load
+const StatsFallback = ({ title, children }) => (
+  <div className="rounded-xl bg-card-bg border border-card-border p-6 min-w-[300px] text-center">
+    <h3 className="text-accent font-semibold mb-2">{title}</h3>
+    {children}
+  </div>
+);
+
+const StatsImage = ({ src, alt, className, fallbackTitle }) => {
+  const [hasError, setHasError] = useState(false);
+  
+  if (hasError) {
+    return (
+      <StatsFallback title={fallbackTitle}>
+        <p className="text-muted text-sm">
+          Stats temporarily unavailable.
+          <br />
+          <a 
+            href={`https://github.com/${GITHUB_USERNAME}`}
+            className="text-accent hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub →
+          </a>
+        </p>
+      </StatsFallback>
+    );
+  }
+  
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      loading="lazy"
+      onError={() => setHasError(true)}
+    />
+  );
+};
 
 const GitHubStats = () => {
   return (
@@ -15,64 +57,49 @@ const GitHubStats = () => {
         <div className="flex flex-col items-center gap-8">
           {/* Stats Cards Row */}
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center w-full">
-            {/* GitHub Stats */}
+            {/* GitHub Stats - Using alternate host */}
             <a 
               href={`https://github.com/${GITHUB_USERNAME}`}
               target="_blank"
               rel="noopener noreferrer"
               className="group transition-all duration-200 ease-out hover:scale-[1.03]"
             >
-              <img
-                src={`https://github-readme-stats.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=transparent&hide_border=true&title_color=ff9800&icon_color=ff9800&text_color=9ca3af&bg_color=00000000`}
+              <StatsImage
+                src={`https://github-readme-stats-eight-theta.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=transparent&hide_border=true&title_color=ff9800&icon_color=ff9800&text_color=9ca3af&bg_color=00000000`}
                 alt="GitHub Stats"
                 className="rounded-xl shadow-soft group-hover:shadow-accent-ring transition-shadow duration-200"
-                loading="lazy"
+                fallbackTitle="GitHub Stats"
               />
             </a>
             
-            {/* Top Languages */}
+            {/* Top Languages - Using alternate host */}
             <a 
               href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
               target="_blank"
               rel="noopener noreferrer"
               className="group transition-all duration-200 ease-out hover:scale-[1.03]"
             >
-              <img
-                src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${GITHUB_USERNAME}&layout=compact&theme=transparent&hide_border=true&title_color=ff9800&text_color=9ca3af&bg_color=00000000`}
+              <StatsImage
+                src={`https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=${GITHUB_USERNAME}&layout=compact&theme=transparent&hide_border=true&title_color=ff9800&text_color=9ca3af&bg_color=00000000`}
                 alt="Top Languages"
                 className="rounded-xl shadow-soft group-hover:shadow-accent-ring transition-shadow duration-200"
-                loading="lazy"
+                fallbackTitle="Top Languages"
               />
             </a>
           </div>
           
-          {/* Contribution Graph */}
-          <a 
-            href={`https://github.com/${GITHUB_USERNAME}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group transition-all duration-200 ease-out hover:scale-[1.01] w-full max-w-4xl"
-          >
-            <img
-              src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=github-compact&hide_border=true&bg_color=00000000&color=9ca3af&line=ff9800&point=ff9800&area=true&area_color=ff9800`}
-              alt="GitHub Contribution Graph"
-              className="w-full rounded-xl shadow-soft group-hover:shadow-accent-ring transition-shadow duration-200"
-              loading="lazy"
-            />
-          </a>
-          
-          {/* Streak Stats */}
+          {/* Streak Stats - Using alternate reliable host */}
           <a 
             href={`https://github.com/${GITHUB_USERNAME}`}
             target="_blank"
             rel="noopener noreferrer"
             className="group transition-all duration-200 ease-out hover:scale-[1.03]"
           >
-            <img
-              src={`https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=transparent&hide_border=true&ring=ff9800&fire=ff9800&currStreakLabel=ff9800&sideLabels=9ca3af&currStreakNum=9ca3af&sideNums=9ca3af&dates=6b7280&background=00000000`}
+            <StatsImage
+              src={`https://streak-stats.demolab.com/?user=${GITHUB_USERNAME}&theme=transparent&hide_border=true&ring=ff9800&fire=ff9800&currStreakLabel=ff9800&sideLabels=9ca3af&currStreakNum=9ca3af&sideNums=9ca3af&dates=6b7280&background=00000000`}
               alt="GitHub Streak"
               className="rounded-xl shadow-soft group-hover:shadow-accent-ring transition-shadow duration-200"
-              loading="lazy"
+              fallbackTitle="GitHub Streak"
             />
           </a>
           
