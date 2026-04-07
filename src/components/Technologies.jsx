@@ -1,207 +1,230 @@
-import { BiLogoPostgresql, BiLogoTypescript } from "react-icons/bi";
-import { DiAndroid, DiApple, DiPython, DiRedis } from "react-icons/di";
-import { FaNodeJs } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { RiReactjsLine } from "react-icons/ri";
-import { SiCplusplus, SiMongodb, SiMysql, SiReduxsaga, SiSelenium, SiLangchain, SiOpenai, SiHuggingface,SiDocker, SiKubernetes,SiFastapi, SiApacheairflow   } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
-import { animate, motion } from "framer-motion";
+import { BiLogoTypescript, BiLogoPostgresql } from "react-icons/bi";
+import { FaNodeJs, FaAws } from "react-icons/fa";
+import { DiPython, DiRedis, DiAndroid, DiApple } from "react-icons/di";
+import {
+  SiFastapi,
+  SiMongodb,
+  SiDocker,
+  SiKubernetes,
+  SiLangchain,
+  SiOpenai,
+  SiTailwindcss,
+  SiExpress,
+  SiGithubactions,
+  SiFirebase,
+  SiTwilio,
+} from "react-icons/si";
 
-const iconVariants = (duration) => ({
-  initial: { y: -10 },
-  animate: {
-    y: [10, -10],
-    transition: {
-      duration: duration,
-      ease: "linear",
-      repeat: Infinity,
-      repeatType: "reverse",
-    },
+const focusAreas = [
+  "Full-Stack Apps",
+  "AI Systems",
+  "MCP Servers",
+  "Cloud & DevOps",
+  "Mobile",
+  "Real-Time",
+];
+
+const skillGroups = [
+  {
+    title: "Frontend Engineering",
+    subtitle:
+      "Responsive interfaces, product-focused UI, and modern web applications.",
+    icon: RiReactjsLine,
+    skills: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "Responsive Design",
+    ],
+    techIcons: [RiReactjsLine, TbBrandNextjs, BiLogoTypescript, SiTailwindcss],
   },
-});
+  {
+    title: "Backend & APIs",
+    subtitle:
+      "Backend services, API design, data handling, and production workflows.",
+    icon: FaNodeJs,
+    skills: [
+      "FastAPI",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "WebSocket",
+      "Authentication",
+      "System Design",
+    ],
+    techIcons: [SiFastapi, FaNodeJs, SiExpress, DiPython],
+  },
+  {
+    title: "AI, Agents & Automation",
+    subtitle:
+      "Applied AI workflows, retrieval systems, automation, and agent-based tools.",
+    icon: SiLangchain,
+    skills: [
+      "LangChain",
+      "OpenAI APIs",
+      "RAG Pipelines",
+      "FAISS",
+      "Multi-Agent Systems",
+      "MCP Servers",
+      "Prompt Workflows",
+    ],
+    techIcons: [SiLangchain, SiOpenai, DiPython, DiRedis],
+  },
+  {
+    title: "Cloud & DevOps",
+    subtitle:
+      "Deployment, infrastructure, containers, CI/CD, and scalable cloud systems.",
+    icon: FaAws,
+    skills: [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "GitHub Actions",
+      "CI/CD",
+      "CloudFormation",
+      "Monitoring",
+    ],
+    techIcons: [FaAws, SiDocker, SiKubernetes, SiGithubactions],
+  },
+  {
+    title: "Data & Storage",
+    subtitle:
+      "Relational and NoSQL data systems, caching, and backend performance work.",
+    icon: BiLogoPostgresql,
+    skills: [
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "SQL",
+      "DynamoDB",
+      "Data Modeling",
+      "Query Optimization",
+    ],
+    techIcons: [BiLogoPostgresql, SiMongodb, DiRedis, DiPython],
+  },
+  {
+    title: "Mobile & Real-Time",
+    subtitle:
+      "Cross-platform apps, real-time communication, and production mobile integrations.",
+    icon: DiAndroid,
+    skills: [
+      "React Native",
+      "iOS",
+      "Android",
+      "WebRTC",
+      "Socket.IO",
+      "Firebase",
+      "Twilio",
+    ],
+    techIcons: [RiReactjsLine, DiApple, DiAndroid, SiFirebase, SiTwilio],
+  },
+];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      delay: index * 0.06,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  }),
+};
 
 const Technologies = () => {
   return (
-    <div className="pb-24">
-      <motion.h2
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
-        transition={{ duration: 1.5 }}
-        className="my-20 text-center text-4xl leading-tight"
-      >
-        <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold inline-block py-2">
-          Technologies
-        </span>
-      </motion.h2>
-      <motion.div
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
-        transition={{ duration: 1.5 }}
-        className="flex flex-wrap items-center justify-center gap-4"
-      >
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <RiReactjsLine className="text-5xl md:text-7xl tech-react transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(3)}
-          className="hover:scale-110 transition-transform"
-        >
-          <TbBrandNextjs className="text-5xl md:text-7xl tech-next transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiMongodb className="text-5xl md:text-7xl tech-mongodb transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2)}
-          className="hover:scale-110 transition-transform"
-        >
-          <DiRedis className="text-5xl md:text-7xl tech-redis transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(6)}
-          className="hover:scale-110 transition-transform"
-        >
-          <FaNodeJs className="text-5xl md:text-7xl tech-node transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4)}
-          className="hover:scale-110 transition-transform"
-        >
-          <BiLogoPostgresql className="text-5xl md:text-7xl tech-postgres transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(7)}
-          className="hover:scale-110 transition-transform"
-        >
-          <BiLogoTypescript className="text-5xl md:text-7xl tech-typescript transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(5.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <DiPython className="text-5xl md:text-7xl tech-python transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(3.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <DiAndroid className="text-5xl md:text-7xl tech-android transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2)}
-          className="hover:scale-110 transition-transform"
-        >
-          <DiApple className="text-5xl md:text-7xl tech-apple transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiReduxsaga className="text-5xl md:text-7xl tech-redux transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiCplusplus className="text-5xl md:text-7xl tech-cpp transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiMysql className="text-5xl md:text-7xl tech-mysql transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(2.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiSelenium className="text-5xl md:text-7xl tech-selenium transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(3.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiLangchain className="text-5xl md:text-7xl tech-langchain transition-colors" />
-        </motion.div>
-        {/* <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiGooglecloud className="text-5xl md:text-7xl tech-google transition-colors" />
-        </motion.div> */}
-        {/* <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiAmazonaws className="text-5xl md:text-7xl tech-amazonaws transition-colors" />
-        </motion.div> */}
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiDocker className="text-5xl md:text-6xl tech-docker transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiKubernetes className="text-5xl md:text-6xl tech-kubernetes transition-colors" />
-        </motion.div>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={iconVariants(4.5)}
-          className="hover:scale-110 transition-transform"
-        >
-          <SiFastapi className="text-5xl md:text-6xl tech-fastapi transition-colors" />
-        </motion.div>
+    <section className="pb-16 sm:pb-20">
+      <div className="mb-8 text-center sm:mb-10">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent sm:text-sm">
+          Tech Stack
+        </p>
 
-    
-      </motion.div>
-    </div>
+        <h2 className="text-2xl font-bold text-fg sm:text-3xl lg:text-4xl">
+          Full-stack engineering across product, AI, and cloud
+        </h2>
+
+        <p className="mx-auto mt-4 max-w-3xl px-2 text-sm leading-7 text-fg/75 sm:px-0 sm:text-base lg:text-lg">
+          I work across frontend interfaces, backend systems, AI workflows,
+          infrastructure, and real-time applications. This section is broad on
+          purpose because the roles I’m targeting span full-stack, backend,
+          frontend, mobile, cloud, and applied AI engineering.
+        </p>
+      </div>
+
+      <div className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-10 sm:gap-3">
+        {focusAreas.map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-border bg-card px-3 py-2 text-xs font-medium text-fg/85 shadow-sm sm:px-4 sm:text-sm"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {skillGroups.map((group, index) => {
+          const Icon = group.icon;
+
+          return (
+           <motion.div
+  key={group.title}
+  custom={index}
+  variants={cardVariants}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  whileHover={{ y: -6 }}
+  className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent/5 hover:shadow-lg sm:p-6"
+>
+              <div className="mb-5 flex items-start gap-4">
+               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/10 text-accent sm:h-12 sm:w-12">
+  <Icon className="text-xl sm:text-2xl" />
+</div>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold text-fg sm:text-xl">
+                    {group.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-fg/70">
+                    {group.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-5 flex flex-wrap gap-2 sm:gap-3">
+                {group.techIcons.map((TechIcon, idx) => (
+                  <div
+                    key={idx}
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-bg text-accent sm:h-10 sm:w-10"
+                  >
+                    <TechIcon className="text-lg sm:text-xl" />
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+className="rounded-full border border-border px-3 py-1.5 text-[11px] font-medium text-fg/80 sm:text-xs"                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

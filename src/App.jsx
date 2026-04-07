@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Experience from "./components/Experience";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -8,167 +8,83 @@ import Technologies from "./components/Technologies";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import SplashScreen from "./components/SplashScreen";
 import SEO from "./components/SEO";
 import GitHubStats from "./components/GitHubStats";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedSection, setSelectedSection] = useState("experience");
-  const [splashMode, setSplashMode] = useState("full");
-
-  // Decide splash mode on mount
-  useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisited");
-    if (hasVisited) {
-      setSplashMode("logo");
-    } else {
-      setSplashMode("full");
-      localStorage.setItem("hasVisited", "true");
-    }
-  }, []);
-
-  // Simulate loading or wait for animation to complete
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), splashMode === "full" ? 3000 : 1200); // Shorter for logo mode
-    return () => clearTimeout(timer); // Cleanup timer
-  }, [splashMode]);
-
-  const handleButtonClick = (section) => {
-    setSelectedSection(section); // Update section based on button click
-  };
 
   return (
-    <div className="min-h-screen overflow-x-hidden text-primary antialiased">
+    <>
       <SEO />
       <ImagePreloader />
-      <Toaster 
-        position="top-center"
-        containerStyle={{
-          top: 100,
-          zIndex: 9999,
-        }}
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: '#1f2937',
-            color: '#fff',
-            padding: '16px',
-            borderRadius: '12px',
-            fontSize: '14px',
-          },
-          success: {
-            icon: '✅',
-            style: {
-              background: '#065f46',
-            },
-          },
-          error: {
-            icon: '❌',
-            style: {
-              background: '#991b1b',
-            },
-          },
-        }}
-      />
-      {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="relative h-full w-full bg-primary">
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20"></div>
-          {/* Radial Gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "radial-gradient(circle at 50% 0%, var(--bg-secondary-alt) 0%, transparent 75%)"
-            }}
-          ></div>
-        </div>
-      </div>
+      <Toaster position="top-center" />
 
-      {/* Content */}
-      {isLoading ? (
-        <SplashScreen
-          onAnimationComplete={() => setIsLoading(false)}
-          mode={splashMode}
-        />
-      ) : (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Navbar />
-          <div className="space-y-32">
-            <section id="home">
-              <Hero />
-            </section>
-            
-            <section id="technologies">
-              <Technologies />
-            </section>
+      <div className="min-h-screen bg-bg text-fg">
+        <Navbar />
 
-            {/* Section Buttons */}
-            <div className="flex justify-center">
-              <div className="w-full max-w-[900px] flex border-2 border-border rounded-full overflow-hidden shadow-soft hover:shadow-accent-ring transition-all duration-300">
-                <button
-                onClick={() => handleButtonClick("experience")}
-                className={`${
+        <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+         <section id="home"   className="min-h-[calc(100svh-72px)] flex items-center">
+  <Hero />
+</section>
+
+          <section id="technologies" className="py-12">
+            <Technologies />
+          </section>
+
+          <section id="experience-education" className="py-12">
+            <div className="mb-8 text-center">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+                Background
+              </p>
+              <h2 className="text-3xl font-bold text-fg sm:text-4xl">
+                Professional experience and education
+              </h2>
+            </div>
+
+            <div className="mx-auto mb-8 flex max-w-md overflow-hidden rounded-full border border-border">
+              <button
+                onClick={() => setSelectedSection("experience")}
+                className={`w-1/2 px-6 py-3 text-base font-semibold transition-colors duration-200 ${
                   selectedSection === "experience"
                     ? "bg-accent text-accent-foreground"
-                    : "bg-transparent text-fg"
-                } py-3 px-6 border-r-2 border-border text-xl font-semibold transition duration-300 ease-in-out hover:bg-accent-hover hover:text-accent-foreground w-full focus:outline-none focus:ring-2 focus:ring-accent-ring`} 
+                    : "bg-transparent text-fg hover:bg-card"
+                }`}
               >
                 Experience
               </button>
               <button
-                onClick={() => handleButtonClick("education")}
-                className={`${
+                onClick={() => setSelectedSection("education")}
+                className={`w-1/2 px-6 py-3 text-base font-semibold transition-colors duration-200 ${
                   selectedSection === "education"
                     ? "bg-accent text-accent-foreground"
-                    : "bg-transparent text-fg"
-                } py-3 px-6 text-xl font-semibold transition duration-300 ease-in-out hover:bg-accent-hover hover:text-accent-foreground w-full focus:outline-none focus:ring-2 focus:ring-accent-ring`} 
+                    : "bg-transparent text-fg hover:bg-card"
+                }`}
               >
                 Education
               </button>
             </div>
-          </div>
 
-            {/* Conditional Section Rendering */}
-            <section id="experience-education">
-              <div className="mt-16">
-                {selectedSection === "experience" ? (
-                  <Experience />
-                ) : (
-                  <Education />
-                )}
-              </div>
-            </section>
+            {selectedSection === "experience" ? <Experience /> : <Education />}
+          </section>
 
-            {/* Projects Section */}
-            <section id="projects">
-              <div className="mt-24">
-                <Project />
-              </div>
-            </section>
+          <section id="projects" className="py-12">
+            <Project />
+          </section>
 
-            {/* GitHub Stats Section */}
-            <section id="github">
-              <div className="mt-24">
-                <GitHubStats />
-              </div>
-            </section>
+          <section className="py-12">
+            <GitHubStats />
+          </section>
 
-            {/* Contact Section */}
-            <section id="contact">
-              <div className="mt-24">
-                <Contact />
-              </div>
-            </section>
-          </div>
-          
-          {/* Footer */}
-          <Footer />
-        </div>
-      )}
-    </div>
+          <section id="contact" className="py-12">
+            <Contact />
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+    </>
   );
 };
 

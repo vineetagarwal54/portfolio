@@ -14,7 +14,7 @@ const socialLinks = [
   {
     href: "https://github.com/vineetagarwal54",
     label: "GitHub",
-    icon: FaGithub,
+    icon: FaGithub, 
   },
   {
     href: "https://twitter.com/vineetagarwal540",
@@ -25,7 +25,7 @@ const socialLinks = [
 
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "Tech", href: "#technologies" },
+  { name: "Skills", href: "#technologies" },
   { name: "Experience", href: "#experience-education" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
@@ -137,7 +137,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-0 z-50 w-full px-4 sm:px-8 py-3 transition-all duration-300 ${
+    <nav className={`z-50 w-full px-4 sm:px-8 py-3 transition-all duration-300 ${
       scrolled 
         ? 'bg-bg/95 backdrop-blur-xl shadow-lg border-b border-border/50' 
         : 'bg-bg/70 backdrop-blur-md border-b border-transparent'

@@ -1,20 +1,23 @@
-import React from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import { RiSendPlaneFill, RiMailFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
-import toast from 'react-hot-toast';
-import AnimateOnScroll from "./AnimateOnScroll";
-import { trackContactFormSubmit, trackEmailClick, trackSocialClick } from "../services/analytics";
+import { useRef, useState } from "react";
+import {
+  RiSendPlaneFill,
+  RiMailFill,
+  RiLinkedinFill,
+  RiGithubFill,
+} from "react-icons/ri";
+import toast from "react-hot-toast";
+import {
+  trackContactFormSubmit,
+  trackEmailClick,
+  trackSocialClick,
+} from "../services/analytics";
 
-// Contact email constant
 const CONTACT_EMAIL = "vineetagarwal540@gmail.com";
-
-// Rate limiting constants
 const MAX_MESSAGES_PER_WEEK = 3;
-const RATE_LIMIT_KEY = 'contact_form_submissions';
+const RATE_LIMIT_KEY = "contact_form_submissions";
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -22,61 +25,58 @@ const Contact = () => {
     message: "",
   });
 
-  // Check rate limit
   const checkRateLimit = () => {
     const now = Date.now();
-    const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-    
-    // Get submission history from localStorage
+    const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
     const submissionsJSON = localStorage.getItem(RATE_LIMIT_KEY);
     let submissions = submissionsJSON ? JSON.parse(submissionsJSON) : [];
-    
-    // Remove submissions older than 1 week
-    submissions = submissions.filter(timestamp => now - timestamp < oneWeek);
-    
-    // Check if limit exceeded
+
+    submissions = submissions.filter((timestamp) => now - timestamp < oneWeek);
+
     if (submissions.length >= MAX_MESSAGES_PER_WEEK) {
       const oldestSubmission = Math.min(...submissions);
       const timeUntilReset = oneWeek - (now - oldestSubmission);
-      const daysRemaining = Math.ceil(timeUntilReset / (24 * 60 * 60 * 1000));
-      
+      const daysRemaining = Math.ceil(
+        timeUntilReset / (24 * 60 * 60 * 1000)
+      );
+
       return {
         allowed: false,
         daysRemaining,
-        messagesUsed: submissions.length
+        messagesUsed: submissions.length,
       };
     }
-    
+
     return {
       allowed: true,
-      messagesRemaining: MAX_MESSAGES_PER_WEEK - submissions.length
+      messagesRemaining: MAX_MESSAGES_PER_WEEK - submissions.length,
     };
   };
 
-  // Record successful submission
   const recordSubmission = () => {
     const now = Date.now();
     const submissionsJSON = localStorage.getItem(RATE_LIMIT_KEY);
-    let submissions = submissionsJSON ? JSON.parse(submissionsJSON) : [];
-    
+    const submissions = submissionsJSON ? JSON.parse(submissionsJSON) : [];
     submissions.push(now);
     localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(submissions));
   };
 
   const handleChange = ({ target: { name, value } }) => {
-    setForm({ ...form, [name]: value });
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    // Check rate limit
     const rateLimitCheck = checkRateLimit();
     if (!rateLimitCheck.allowed) {
       toast.error(
@@ -94,7 +94,7 @@ const Contact = () => {
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
@@ -102,12 +102,20 @@ const Contact = () => {
       if (data.success) {
         recordSubmission();
         trackContactFormSubmit(true);
+
         const remaining = rateLimitCheck.messagesRemaining - 1;
         toast.success(
-          `Message sent successfully! I'll get back to you soon. (${remaining} message${remaining !== 1 ? 's' : ''} remaining this week)`,
+          `Message sent successfully! (${remaining} message${
+            remaining !== 1 ? "s" : ""
+          } remaining this week)`,
           { duration: 5000 }
         );
-        setForm({ name: "", email: "", message: "" });
+
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
       } else {
         trackContactFormSubmit(false);
         toast.error("Failed to send message. Please try again.");
@@ -121,179 +129,146 @@ const Contact = () => {
     }
   };
 
-
   const contactInfo = [
     {
-      icon: <RiMailFill className="text-2xl" />,
+      icon: <RiMailFill className="text-xl" />,
       label: "Email",
-      value: "Send me a message",
-      link: `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`
+      value: "Reach me directly",
+      link: `mailto:${CONTACT_EMAIL}`,
     },
     {
-      icon: <RiLinkedinFill className="text-2xl" />,
+      icon: <RiLinkedinFill className="text-xl" />,
       label: "LinkedIn",
       value: "Connect with me",
-      link: "https://www.linkedin.com/in/vineet-agarwal-540abc/"
+      link: "https://www.linkedin.com/in/vineet-agarwal-540abc/",
     },
     {
-      icon: <RiGithubFill className="text-2xl" />,
+      icon: <RiGithubFill className="text-xl" />,
       label: "GitHub",
-      value: "View my projects",
-      link: "https://github.com/vineetagarwal54"
-    }
+      value: "Explore my repositories",
+      link: "https://github.com/vineetagarwal54",
+    },
   ];
 
   return (
-    <div className="pb-16">
-      <AnimateOnScroll>
-        <h2 className="mb-16 text-center text-4xl leading-tight">
-          <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent font-bold inline-block py-2">
-            Get In Touch
-          </span>
+    <section className="pb-8">
+      <div className="mb-10 text-center">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+          Contact
+        </p>
+        <h2 className="text-3xl font-bold text-fg sm:text-4xl">
+          Open to full-stack, backend, frontend, mobile, and AI roles
         </h2>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-fg/75 sm:text-lg">
+          I’m actively looking for software engineering opportunities where I
+          can contribute across product development, backend systems, AI
+          workflows, or cloud-backed applications.
+        </p>
+      </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-fg mb-4">Let's Connect</h3>
-                <p className="text-lg muted mb-8">
-                  I'm always interested in new opportunities and projects. 
-                  Whether you have a question or just want to say hi, feel free to reach out!
-                </p>
-              </div>
+      <div className="grid gap-8 lg:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <h3 className="mb-3 text-2xl font-semibold text-fg">Let’s connect</h3>
+          <p className="mb-6 text-fg/75">
+            Whether it’s a full-time role, internship, technical discussion, or
+            collaboration, feel free to reach out.
+          </p>
 
-              {/* Contact Methods */}
-              <div className="space-y-6">
-                {contactInfo.map((contact, index) => (
-                  <a
-                    key={index}
-                    href={contact.link}
-                    target={contact.link.startsWith('http') ? '_blank' : '_self'}
-                    rel={contact.link.startsWith('http') ? 'noopener noreferrer' : ''}
-                    className="flex items-center p-4 rounded-2xl bg-secondary/60 backdrop-blur-sm shadow-md hover:shadow-xl hover:scale-105 hover:-rotate-1 transition-all duration-300 group"
-                    onClick={() => {
-                      if (contact.label === 'Email') trackEmailClick();
-                      else trackSocialClick(contact.label);
-                    }}
-                  >
-                    <div className="text-accent group-hover:text-accent-secondary transition-colors">
-                      {contact.icon}
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-fg font-semibold">{contact.label}</h4>
-                      <p className="muted text-sm">{contact.value}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-
-              {/* Call to Action */}
-              <div className="p-6 card bg-gradient-to-r from-accent/10 to-accent-secondary/10 border border-accent/20">
-                <h4 className="text-lg font-semibold text-fg mb-2">Ready to start a project?</h4>
-                <p className="muted text-sm mb-4">
-                  I'm available for freelance work and full-time opportunities.
-                </p>
-                <a 
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-accent hover:text-accent-secondary transition-colors"
-                  onClick={() => trackEmailClick()}
-                >
-                  <RiMailFill className="mr-2" />
-                  Send me an email
-                </a>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="card p-6 sm:p-8">
-              <h3 className="text-2xl font-bold text-fg mb-6">Send a Message</h3>
-              
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* Name Field */}
+          <div className="space-y-4">
+            {contactInfo.map((contact) => (
+              <a
+                key={contact.label}
+                href={contact.link}
+                target={contact.label === "Email" ? "_self" : "_blank"}
+                rel="noreferrer"
+                onClick={() => {
+                  if (contact.label === "Email") {
+                    trackEmailClick();
+                  } else {
+                    trackSocialClick(contact.label);
+                  }
+                }}
+                className="flex items-center gap-4 rounded-xl border border-border px-4 py-4 transition-colors duration-200 hover:bg-accent hover:text-accent-foreground"
+              >
+                <div>{contact.icon}</div>
                 <div>
-                  <label htmlFor="name" className="block text-lg muted mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all"
-                    placeholder="Your full name"
-                  />
+                  <p className="font-semibold">{contact.label}</p>
+                  <p className="text-sm opacity-80">{contact.value}</p>
                 </div>
+              </a>
+            ))}
+          </div>
 
-                {/* Email Field */}
-                <div>
-                  <label htmlFor="email" className="block text-lg muted mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <label htmlFor="message" className="block text-lg muted mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full bg-bg px-4 py-3 rounded-lg placeholder:text-muted text-lg text-fg focus:outline-none focus:ring-2 focus:ring-accent-ring border border-border transition-all resize-none"
-                    placeholder="Tell me about your project or just say hello..."
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-accent text-accent-foreground px-6 py-4 rounded-full shadow-lg font-bold flex justify-center items-center text-lg gap-3 hover:shadow-[0_8px_30px_rgba(var(--accent-rgb),0.4)] hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {loading ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <RiSendPlaneFill className="text-xl" />
-                    </>
-                  )}
-                </button>
-
-                <p className="text-sm muted text-center">
-                  * Required fields. I'll respond within 24 hours.
-                </p>
-              </form>
-            </div>
+          <div className="mt-8 rounded-xl border border-border p-5">
+            <h4 className="mb-2 text-lg font-semibold text-fg">
+              Best fit for this portfolio
+            </h4>
+            <p className="text-sm leading-7 text-fg/75">
+              Full-stack engineering, backend APIs, frontend product work,
+              cloud-native systems, applied AI, agent workflows, and
+              real-time/mobile-adjacent product roles.
+            </p>
           </div>
         </div>
-      </AnimateOnScroll>
-    </div>
+
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <h3 className="mb-5 text-2xl font-semibold text-fg">Send a message</h3>
+
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-fg">
+                Full Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-fg outline-none transition-colors focus:border-accent"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-fg">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-fg outline-none transition-colors focus:border-accent"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-fg">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                rows="6"
+                placeholder="Tell me about the role, project, or opportunity."
+                className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-fg outline-none transition-colors focus:border-accent"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors duration-200 hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              <RiSendPlaneFill />
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };
 

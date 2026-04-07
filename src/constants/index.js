@@ -1,4 +1,4 @@
-import meta from "../assets/company/meta.png";
+// import meta from "../assets/company/meta.png";
 import svipes_logo from "../assets/svipes_logo.jpg";
 import xelp_logo from "../assets/xelp_logo.jpg";
 import iith from "../assets/iith.jpg";
@@ -12,13 +12,15 @@ import suntek_corp from "../assets/suntek_corp.jpg"
 import reportGen from "../assets/reportGen.png"
 import terrapinEvents from "../assets/terrapinEvents.png"
 import videoAnalytics from "../assets/videoAnalytics.png"
-import { title } from "framer-motion/client";
+// import { title } from "framer-motion/client";
 
-export const HERO_CONTENT = `I build smart, fast, cloud-ready apps. My focus is where mobile meets AI — React Native on the front, FastAPI and multi-agent systems on the back, all stitched together across AWS and containerized workflows. I love turning messy problems into clean mobile experiences powered by LLMs, RAG pipelines, and MCP-style agent orchestration. Full-stack when needed, obsessive about architecture, and always pushing toward smarter, more reliable products.`;
+export const HERO_CONTENT = `I build full-stack products and AI systems that are fast, reliable, and practical.
+From frontend interfaces and backend APIs to cloud infrastructure, agent workflows, and real-time systems, I enjoy taking products from idea to production.
+My work spans React, React Native, FastAPI, Node.js, AWS, RAG pipelines, multi-agent workflows, and performance-focused engineering.`;
 
 export const experiences = [
   {
-    title: "Full Stack Developer",
+    title: "Software Developer",
     company_name: "Svipes",
     icon: svipes_logo,
     iconBg: "#383E56",
@@ -46,7 +48,7 @@ export const experiences = [
     ],
   },
   {
-    title: "Summer Internship",
+    title: "Summer Software Intern",
     company_name: "IIIT Hyderabad",
     icon: iith,
     iconBg: "#fff",
@@ -81,12 +83,12 @@ export const education = [
     iconBg: "#383E56",
     date: "January 2025 - December 2026",
     website: "https://umd.edu/",
-    points: [
-      "Minor in Cloud Security covering AWS, Azure, and GCP security best practices with hands-on certification preparation",
-      "Extensive experience with containerization using Docker and Kubernetes, microservices architecture patterns",
-      "Advanced studies in DevOps practices, CI/CD pipelines, and Infrastructure as Code (IaC) using Terraform",
-      "Research focus on scalable system design, performance optimization, and enterprise software development",
-    ],
+   points: [
+  "Minor in Cloud Engineering with coursework in Cloud Computing, Virtualization, and Cloud Security",
+  "Hands-on experience with Docker, Kubernetes, and cloud-native system design",
+  "Focused on scalable software architecture, backend systems, and performance-oriented engineering",
+  "Interested in applied AI systems, production infrastructure, and modern developer workflows",
+],
   },
    {
     company_name: "Osmania University",
@@ -105,150 +107,103 @@ export const education = [
 
 export const projects = [
   {
-    name: "Terrapin Events - Campus Event Management",
-    description:
-      "Enterprise-grade event management platform for University of Maryland campus. Architected full-stack solution with React frontend, FastAPI backend, and MongoDB database deployed on Kubernetes cluster. Implemented CAS SSO authentication with JWT RBAC, automated waitlist management, Stripe payment integration with webhooks, email notification system, and calendar integration. Collaborated in agile team environment with CI/CD pipelines, achieving 100+ concurrent user capacity and sub-200ms API response times.",
-    tags: [
-      {
-        name: "Kubernetes",
-        color: "text-blue-600",
-      },
-      {
-        name: "FastAPI",
-        color: "text-green-600",
-      },
-      {
-        name: "MongoDB",
-        color: "text-orange-600",
-      },
-    ],
-    image: terrapinEvents,
-    source_code_link: "https://github.com/bhavnakumari/enpm613-team4-terrapin-events",
-  },
-  {
-    name: "AWS Video Analytics Streaming Platform",
-    description:
-      "Cloud-native video analytics platform on AWS EKS with microservices architecture. Engineered serverless backend using 3 Lambda functions (uploader, processor, analytics) integrated with S3, DynamoDB, SQS, API Gateway, and AppSync GraphQL. Containerized React frontend deployed on EKS with auto-scaling (2-10 pods), Application Load Balancer, and CloudFront CDN. Implemented comprehensive infrastructure-as-code using CloudFormation templates, automated CI/CD with GitHub Actions, network policies, RBAC, and security scanning achieving zero critical vulnerabilities.",
-    tags: [
-      {
-        name: "AWS Lambda",
-        color: "text-orange-500",
-      },
-      {
-        name: "EKS",
-        color: "text-blue-600",
-      },
-      {
-        name: "CloudFormation",
-        color: "text-purple-600",
-      },
-    ],
-    image: videoAnalytics,
-    source_code_link: "https://github.com/Divyesh4683/AWS-Video-Analytics-Streaming-Dashboard",
-  },
-  {
     name: "AI Repository Analyzer",
     description:
-      "An intelligent code analysis platform powered by multi-agent AI systems (AutoGen framework). Upload GitHub repos or ZIP files to get comprehensive architecture insights, API documentation, and database analysis from specialized AI agents (SDE, PM, QA). Features interactive chat with context-aware responses using RAG and FAISS vector search, resumable analysis sessions, and detailed technical reports. Built with FastAPI, LangChain, Streamlit, and OpenAI GPT-4.",
+      "Multi-agent code analysis platform that accepts GitHub repositories or ZIP files and returns architecture insights, API understanding, database analysis, and context-aware Q&A. Built with FastAPI, LangChain, AutoGen, FAISS, Streamlit, and OpenAI.",
     tags: [
-      {
-        name: "AutoGen",
-        color: "text-purple-600",
-      },
-      {
-        name: "LangChain",
-        color: "text-teal-600",
-      },
-      {
-        name: "FAISS",
-        color: "text-blue-600",
-      },
+      { name: "AutoGen", color: "text-purple-600" },
+      { name: "LangChain", color: "text-teal-600" },
+      { name: "FAISS", color: "text-blue-600" },
     ],
+    categories: ["AI", "Backend", "Full Stack"],
+    featured: true,
     image: reportGen,
     source_code_link: "https://github.com/vineetagarwal54/RepoResearchAI",
   },
   {
     name: "Plywood Studio AI Chatbot",
     description:
-      "A modern AI-powered chatbot for Plywood Studio - a premium plywood, doors, and laminate solution provider in Hyderabad. Features instant 24/7 AI-powered customer support with specialized business knowledge, ChatGPT-style interface, and hybrid intelligence that works with or without internet APIs. Built with FastAPI backend, Hugging Face + OpenAI APIs with fallback system, Redis caching, and modern responsive design.",
+      "AI-powered customer support chatbot with business-specific knowledge, fallback model support, Redis caching, and a production-style conversational interface. Built with FastAPI, OpenAI, Hugging Face, and a hybrid inference workflow.",
     tags: [
-      {
-        name: "FastAPI",
-        color: "text-blue-700",
-      },
-      {
-        name: "OpenAI",
-        color: "text-green-600",
-      },
-      {
-        name: "Redis",
-        color: "text-pink-600",
-      },
+      { name: "FastAPI", color: "text-blue-700" },
+      { name: "OpenAI", color: "text-green-600" },
+      { name: "Redis", color: "text-pink-600" },
     ],
+    categories: ["AI", "Backend", "Full Stack"],
+    featured: true,
     image: aIChatbot,
     source_code_link: "https://github.com/vineetagarwal54/AIChatbot",
   },
   {
+    name: "Terrapin Events - Campus Event Management",
+    description:
+      "Full-stack campus event platform with React, FastAPI, MongoDB, CAS SSO, JWT RBAC, payments, and waitlist automation. Deployed with Kubernetes and built in an agile team setup with CI/CD and reliability-focused testing.",
+    tags: [
+      { name: "React", color: "text-blue-600" },
+      { name: "FastAPI", color: "text-green-600" },
+      { name: "MongoDB", color: "text-orange-600" },
+    ],
+    categories: ["Full Stack", "Frontend", "Backend", "Cloud"],
+    featured: true,
+    image: terrapinEvents,
+    source_code_link:
+      "https://github.com/bhavnakumari/enpm613-team4-terrapin-events",
+  },
+  {
+    name: "AWS Video Analytics Streaming Platform",
+    description:
+      "Cloud-native analytics platform using Lambda, EKS, S3, DynamoDB, API Gateway, AppSync, CloudFormation, and CI/CD. Designed around serverless processing, containerized services, and auto-scaling architecture on AWS.",
+    tags: [
+      { name: "AWS Lambda", color: "text-orange-500" },
+      { name: "EKS", color: "text-blue-600" },
+      { name: "CloudFormation", color: "text-purple-600" },
+    ],
+    categories: ["Cloud", "Backend", "Full Stack"],
+    featured: true,
+    image: videoAnalytics,
+    source_code_link:
+      "https://github.com/Divyesh4683/AWS-Video-Analytics-Streaming-Dashboard",
+  },
+  {
     name: "CollabDraw",
     description:
-      "A modern, real-time collaborative whiteboard application built with cutting-edge web technologies. Multiple users can draw simultaneously with live updates, featuring room-based sessions, customizable drawing tools (pencil, rectangle, circle, eraser), color picker, and beautiful glass morphism UI. Built with Next.js 15, TypeScript, WebSocket, PostgreSQL, and Prisma ORM in a monorepo structure.",
+      "Real-time collaborative whiteboard with room-based sessions, live drawing updates, WebSocket communication, PostgreSQL, Prisma, and a structured monorepo setup. A strong example of frontend + backend coordination in real-time systems.",
     tags: [
-      {
-        name: "Next.js",
-        color: "text-blue-700",
-      },
-      {
-        name: "TypeScript",
-        color: "text-green-600",
-      },
-      {
-        name: "WebSocket",
-        color: "text-pink-600",
-      },
+      { name: "Next.js", color: "text-blue-700" },
+      { name: "TypeScript", color: "text-green-600" },
+      { name: "WebSocket", color: "text-pink-600" },
     ],
+    categories: ["Frontend", "Backend", "Full Stack", "Real-Time"],
+    featured: false,
     image: collabDraw,
     source_code_link: "https://github.com/vineetagarwal54/CollabDrawAI",
   },
   {
     name: "Activity Logger",
     description:
-      "A comprehensive activity tracking solution with cross-platform compatibility and robust data analytics capabilities. Built as a full-stack application using React Native for mobile, Node.js for backend APIs, and SQL database for data persistence. Features real-time activity monitoring, detailed analytics dashboard, and seamless user experience across platforms.",
+      "Cross-platform mobile application built with React Native, Node.js, and SQL for activity tracking and analytics. Useful as mobile proof, but positioned here as part of a broader full-stack engineering profile rather than the main headline.",
     tags: [
-      {
-        name: "React Native",
-        color: "text-blue-700",
-      },
-      {
-        name: "Node.js",
-        color: "text-green-600",
-      },
-      {
-        name: "SQL",
-        color: "text-pink-600",
-      },
+      { name: "React Native", color: "text-blue-700" },
+      { name: "Node.js", color: "text-green-600" },
+      { name: "SQL", color: "text-pink-600" },
     ],
+    categories: ["Mobile", "Full Stack", "Backend"],
+    featured: false,
     image: ActivityLogger,
     source_code_link: "https://github.com/vineetagarwal54/ActivityLogger",
   },
   {
     name: "MeetSpace",
     description:
-      "A modern, real-time video conferencing application that enables seamless communication through high-quality video calls, screen sharing, and instant messaging. Features support for multiple participants, recording with pause/resume functionality, real-time chat, dark theme UI, and dynamic grid layout. Built with React, TypeScript, Tailwind CSS, Node.js, Express, and WebRTC for reliable peer-to-peer communication.",
+      "Real-time video conferencing application with React, TypeScript, Node.js, Express, WebRTC, chat, screen sharing, and dynamic participant layouts. Strong proof of real-time systems, frontend interaction, and backend coordination.",
     tags: [
-      {
-        name: "React",
-        color: "text-blue-700",
-      },
-      {
-        name: "WebRTC",
-        color: "text-green-600",
-      },
-      {
-        name: "TypeScript",
-        color: "text-pink-600",
-      },
+      { name: "React", color: "text-blue-700" },
+      { name: "WebRTC", color: "text-green-600" },
+      { name: "TypeScript", color: "text-pink-600" },
     ],
+    categories: ["Frontend", "Backend", "Full Stack", "Real-Time"],
+    featured: false,
     image: MeetSpace,
     source_code_link: "https://github.com/vineetagarwal54/MeetSpace",
-  }
+  },
 ];
