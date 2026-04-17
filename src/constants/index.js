@@ -12,6 +12,9 @@ import suntek_corp from "../assets/suntek_corp.jpg"
 import reportGen from "../assets/reportGen.png"
 import terrapinEvents from "../assets/terrapinEvents.png"
 import videoAnalytics from "../assets/videoAnalytics.png"
+import jobTracker from "../assets/jobTracker.png"
+import carebridge from "../assets/carebridge.png"
+import text_to_image from "../assets/text_to_image.png"
 // import { title } from "framer-motion/client";
 
 export const HERO_CONTENT = `I build full-stack products and AI systems that are fast, reliable, and practical.
@@ -107,6 +110,21 @@ export const education = [
 
 export const projects = [
   {
+    name: "CareBridge AI",
+    description:
+      "AI-powered care transition platform that transforms discharge PDFs into structured clinical data, multi-agent validation outputs, and actionable care plans. Built with FastAPI, React, PostgreSQL, Google ADK, and confidence-threshold guardrails to improve reliability and catch post-discharge risks earlier.",
+    tags: [
+      { name: "FastAPI", color: "text-green-600" },
+      { name: "Google ADK", color: "text-purple-600" },
+      { name: "React", color: "text-blue-600" },
+      { name: "AI Agents", color: "text-blue-600" },
+    ],
+    categories: ["AI", "Healthcare", "Full Stack"],
+    featured: true,
+    image: carebridge,
+    source_code_link: "https://github.com/vineetagarwal54/carebridge-ai",
+  },
+  {
     name: "AI Repository Analyzer",
     description:
       "Multi-agent code analysis platform that accepts GitHub repositories or ZIP files and returns architecture insights, API understanding, database analysis, and context-aware Q&A. Built with FastAPI, LangChain, AutoGen, FAISS, Streamlit, and OpenAI.",
@@ -119,6 +137,35 @@ export const projects = [
     featured: true,
     image: reportGen,
     source_code_link: "https://github.com/vineetagarwal54/RepoResearchAI",
+  },
+  {
+    name: "AWS Video Analytics Streaming Platform",
+    description:
+      "Cloud-native analytics platform using Lambda, EKS, S3, DynamoDB, API Gateway, AppSync, CloudFormation, and CI/CD. Designed around serverless processing, containerized services, and auto-scaling architecture on AWS.",
+    tags: [
+      { name: "AWS Lambda", color: "text-orange-500" },
+      { name: "EKS", color: "text-blue-600" },
+      { name: "CloudFormation", color: "text-purple-600" },
+    ],
+    categories: ["Cloud", "Backend", "Full Stack"],
+    featured: true,
+    image: videoAnalytics,
+    source_code_link:
+      "https://github.com/Divyesh4683/AWS-Video-Analytics-Streaming-Dashboard",
+  },
+  {
+    name: "Text to Image Llama",
+    description:
+      "Local AI image generation system that improves weak text-to-image prompts through an LLM-powered enhancement layer before diffusion inference. Built with FastAPI, llama.cpp, and diffusers to combine local model serving, prompt refinement, and modular AI backend orchestration.",
+    tags: [
+      { name: "FastAPI", color: "text-green-600" },
+      { name: "llama.cpp", color: "text-purple-600" },
+      { name: "Diffusers", color: "text-blue-600" },
+    ],
+    categories: ["AI", "Backend", "ML Systems"],
+    featured: true,
+    image: text_to_image,
+    source_code_link: "https://github.com/vineetagarwal54/text_to_image_llama",
   },
   {
     name: "Plywood Studio AI Chatbot",
@@ -149,21 +196,7 @@ export const projects = [
     source_code_link:
       "https://github.com/bhavnakumari/enpm613-team4-terrapin-events",
   },
-  {
-    name: "AWS Video Analytics Streaming Platform",
-    description:
-      "Cloud-native analytics platform using Lambda, EKS, S3, DynamoDB, API Gateway, AppSync, CloudFormation, and CI/CD. Designed around serverless processing, containerized services, and auto-scaling architecture on AWS.",
-    tags: [
-      { name: "AWS Lambda", color: "text-orange-500" },
-      { name: "EKS", color: "text-blue-600" },
-      { name: "CloudFormation", color: "text-purple-600" },
-    ],
-    categories: ["Cloud", "Backend", "Full Stack"],
-    featured: true,
-    image: videoAnalytics,
-    source_code_link:
-      "https://github.com/Divyesh4683/AWS-Video-Analytics-Streaming-Dashboard",
-  },
+  
   {
     name: "CollabDraw",
     description:
@@ -178,6 +211,21 @@ export const projects = [
     image: collabDraw,
     source_code_link: "https://github.com/vineetagarwal54/CollabDrawAI",
   },
+   {
+    name: "Job Tracker",
+    description:
+      "Electron-based job tracking app that automates the messy process of manually saving postings and tracking applications across platforms. It scrapes job data, organizes application details, and streamlines deadlines, statuses, and follow-ups in one workflow.",
+    tags: [
+      { name: "Electron", color: "text-blue-600" },
+      { name: "Web Scraping", color: "text-teal-600" },
+      { name: "Productivity", color: "text-green-600" },
+    ],
+    categories: ["Desktop App", "Automation", "Full Stack"],
+    featured: true,
+    image: jobTracker,
+    source_code_link: "https://github.com/vineetagarwal54/Job_Tracker",
+  },
+ 
   {
     name: "Activity Logger",
     description:
