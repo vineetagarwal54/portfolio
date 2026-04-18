@@ -54,15 +54,12 @@ const ExperienceCard = ({ experience, index }) => (
 
 const Experience = () => {
   return (
-    <div className="pb-4">
-      {/* <h2 className="my-20 text-center text-4xl">Experience</h2> */}
-      <div className="mt-16 flex flex-col">
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} index={index} />
-          ))}
-        </VerticalTimeline>
-      </div>
+    <div className="mt-4 flex flex-col">
+      <VerticalTimeline>
+        {experiences.map((experience, index) => (
+          <ExperienceCard key={index} experience={experience} index={index} />
+        ))}
+      </VerticalTimeline>
     </div>
   );
 };

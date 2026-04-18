@@ -141,29 +141,25 @@ const cardVariants = {
 
 const Technologies = () => {
   return (
-    <section className="pb-16 sm:pb-20">
-      <div className="mb-8 text-center sm:mb-10">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent sm:text-sm">
-          Tech Stack
-        </p>
-
-        <h2 className="text-2xl font-bold text-fg sm:text-3xl lg:text-4xl">
+    <>
+      <div className="section-header">
+        <p className="section-kicker">Tech Stack</p>
+        <h2 className="section-title">
           Full-stack engineering across product, AI, and cloud
         </h2>
-
-        <p className="mx-auto mt-4 max-w-3xl px-2 text-sm leading-7 text-fg/75 sm:px-0 sm:text-base lg:text-lg">
+        <p className="section-lede">
           I work across frontend interfaces, backend systems, AI workflows,
-          infrastructure, and real-time applications. This section is broad on
-          purpose because the roles I’m targeting span full-stack, backend,
-          frontend, mobile, cloud, and applied AI engineering.
+          infrastructure, and real-time applications — a broad stack for the
+          full-stack, backend, frontend, mobile, cloud, and applied AI roles I'm
+          targeting.
         </p>
       </div>
 
-      <div className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-10 sm:gap-3">
+      <div className="mb-10 flex flex-wrap justify-center gap-2 sm:gap-2.5">
         {focusAreas.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-border bg-card px-3 py-2 text-xs font-medium text-fg/85 shadow-sm sm:px-4 sm:text-sm"
+            className="rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-fg/75 sm:text-sm"
           >
             {item}
           </span>
@@ -175,47 +171,47 @@ const Technologies = () => {
           const Icon = group.icon;
 
           return (
-           <motion.div
-  key={group.title}
-  custom={index}
-  variants={cardVariants}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.2 }}
-  whileHover={{ y: -6 }}
-  className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent/5 hover:shadow-lg sm:p-6"
->
+            <motion.div
+              key={group.title}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              whileHover={{ y: -4 }}
+              className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-accent/60 hover:shadow-lg"
+            >
               <div className="mb-5 flex items-start gap-4">
-               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/10 text-accent sm:h-12 sm:w-12">
-  <Icon className="text-xl sm:text-2xl" />
-</div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <Icon className="text-xl" />
+                </div>
                 <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-fg sm:text-xl">
+                  <h3 className="text-lg font-semibold text-fg">
                     {group.title}
                   </h3>
-
-                  <p className="mt-2 text-sm leading-6 text-fg/70">
+                  <p className="mt-1.5 text-sm leading-6 text-fg/70">
                     {group.subtitle}
                   </p>
                 </div>
               </div>
 
-              <div className="mb-5 flex flex-wrap gap-2 sm:gap-3">
+              <div className="mb-5 flex flex-wrap gap-2">
                 {group.techIcons.map((TechIcon, idx) => (
                   <div
                     key={idx}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-bg text-accent sm:h-10 sm:w-10"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-bg text-accent"
                   >
-                    <TechIcon className="text-lg sm:text-xl" />
+                    <TechIcon className="text-lg" />
                   </div>
                 ))}
               </div>
 
-              <div className="mt-auto flex flex-wrap gap-2">
+              <div className="mt-auto flex flex-wrap gap-1.5">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-className="rounded-full border border-border px-3 py-1.5 text-[11px] font-medium text-fg/80 sm:text-xs"                  >
+                    className="rounded-full border border-border px-2.5 py-1 text-[11px] font-medium text-fg/70"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -224,7 +220,7 @@ className="rounded-full border border-border px-3 py-1.5 text-[11px] font-medium
           );
         })}
       </div>
-    </section>
+    </>
   );
 };
 

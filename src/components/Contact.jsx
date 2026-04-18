@@ -151,22 +151,20 @@ const Contact = () => {
   ];
 
   return (
-    <section className="pb-8">
-      <div className="mb-10 text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-accent">
-          Contact
-        </p>
-        <h2 className="text-3xl font-bold text-fg sm:text-4xl">
+    <>
+      <div className="section-header">
+        <p className="section-kicker">Contact</p>
+        <h2 className="section-title">
           Open to full-stack, backend, frontend, mobile, and AI roles
         </h2>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-fg/75 sm:text-lg">
-          I’m actively looking for software engineering opportunities where I
+        <p className="section-lede">
+          I'm actively looking for software engineering opportunities where I
           can contribute across product development, backend systems, AI
           workflows, or cloud-backed applications.
         </p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
           <h3 className="mb-3 text-2xl font-semibold text-fg">Let’s connect</h3>
           <p className="mb-6 text-fg/75">
@@ -260,7 +258,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors duration-200 hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors duration-200 hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
             >
               <RiSendPlaneFill />
               {loading ? "Sending..." : "Send Message"}
@@ -268,7 +266,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

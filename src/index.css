@@ -8,12 +8,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Offset for fixed navbar */
+    scroll-padding-top: 88px; /* Offset for fixed navbar */
   }
-  
+
   html, body {
     background-color: var(--bg);
     color: var(--fg);
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   /* Performance optimizations */

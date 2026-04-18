@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png";
@@ -14,7 +14,7 @@ const socialLinks = [
   {
     href: "https://github.com/vineetagarwal54",
     label: "GitHub",
-    icon: FaGithub, 
+    icon: FaGithub,
   },
   {
     href: "https://twitter.com/vineetagarwal540",
@@ -36,11 +36,9 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef(null);
   const hamburgerRef = useRef(null);
 
-  // Close dropdown when clicking outside or pressing Escape
   useEffect(() => {
     if (!menuOpen) return;
 
@@ -56,135 +54,104 @@ const Navbar = () => {
     };
 
     const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        setMenuOpen(false);
-      }
+      if (event.key === "Escape") setMenuOpen(false);
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside, { passive: true });
-    document.addEventListener('keydown', handleEscape);
-    
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside, { passive: true });
+    document.addEventListener("keydown", handleEscape);
+
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [menuOpen]);
 
-  // Trigger entrance animations after mount
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Toggle dark mode using data-theme attribute
   const toggleDarkMode = () => {
     setDarkMode((prev) => {
       const next = !prev;
-      if (next) {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-      }
+      document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
+      localStorage.setItem("theme", next ? "dark" : "light");
       return next;
     });
   };
 
-  // On mount, respect system/user preference
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      
-      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-        document.documentElement.setAttribute("data-theme", "dark");
-        setDarkMode(true);
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-        setDarkMode(false);
-      }
+    if (typeof window === "undefined") return;
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      setDarkMode(false);
     }
   }, []);
 
-  // Scroll spy to detect active section
   useEffect(() => {
     const handleScroll = () => {
-      // Track scroll position for navbar styling
-      setScrolled(window.scrollY > 20);
-      
-      const sections = navLinks.map(link => link.href.substring(1)); // Remove '#'
-      const scrollPosition = window.scrollY + 100; // Offset for navbar height
+      setScrolled(window.scrollY > 16);
 
+      const sections = navLinks.map((link) => link.href.substring(1));
+      const scrollPosition = window.scrollY + 140; // offset > navbar + breathing room
+
+      let current = sections[0];
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
-            break;
-          }
+        if (element && scrollPosition >= element.offsetTop) {
+          current = sectionId;
         }
       }
+      setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check on mount
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav className={`z-50 w-full px-4 sm:px-8 py-3 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-bg/95 backdrop-blur-xl shadow-lg border-b border-border/50' 
-        : 'bg-bg/70 backdrop-blur-md border-b border-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo with entrance animation */}
-        <a href="#home" aria-label="Home" className="flex items-center group relative">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-bg/85 backdrop-blur-xl border-b border-border/60 shadow-[0_1px_12px_rgba(0,0,0,0.04)]"
+          : "bg-bg/60 backdrop-blur-md border-b border-transparent"
+      }`}
+    >
+      <div className="shell flex h-[72px] items-center justify-between">
+        <a href="#home" aria-label="Home" className="flex items-center">
           <img
             src={logo}
-            className={`h-10 w-auto sm:h-12 md:h-14 object-contain group-hover:drop-shadow-[0_0_12px_var(--accent)] group-hover:scale-105 transition-all duration-500 ease-out ${
-              mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-            }`}
-            style={{ transitionDelay: '0ms' }}
+            className="h-9 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-10"
             alt="logo"
           />
-          <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 rounded-full blur-xl transition-all duration-500"></div>
         </a>
 
-        {/* Desktop Navigation Links - Floating Bubbles */}
-        <div className="hidden lg:flex items-center gap-3 mx-8">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 group ${
-                activeSection === link.href.substring(1)
-                  ? "text-accent-foreground bg-accent shadow-[0_8px_30px_rgba(var(--accent-rgb),0.4)] scale-105"
-                  : "text-fg bg-secondary/60 backdrop-blur-sm shadow-md hover:shadow-xl hover:scale-110 hover:-rotate-2 hover:text-accent"
-              } ${
-                mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-              }`}
-              style={{ transitionDelay: `${(index + 1) * 75}ms` }}
-            >
-              {/* Glow effect for active state */}
-              {activeSection === link.href.substring(1) && (
-                <span className="absolute inset-0 rounded-full bg-accent blur-xl opacity-50 animate-pulse"></span>
-              )}
-              
-              {/* Text */}
-              <span className="relative z-10">{link.name}</span>
-            </a>
-          ))}
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.substring(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "text-accent-foreground bg-accent"
+                    : "text-fg/80 hover:text-fg hover:bg-secondary/60"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
 
-        {/* Desktop Socials & Toggle */}
-        <div className="hidden lg:flex items-center gap-4 text-2xl">
-          {socialLinks.map((link, index) => {
+        {/* Desktop socials + theme */}
+        <div className="hidden lg:flex items-center gap-2">
+          {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
               <a
@@ -193,48 +160,31 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className={`relative group text-fg hover:text-accent transition-all duration-300 hover:scale-125 hover:-translate-y-1 ${
-                  mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-                }`}
-                style={{ transitionDelay: `${(navLinks.length + index + 1) * 75}ms` }}
                 onClick={() => trackSocialClick(link.label)}
+                className="flex h-9 w-9 items-center justify-center rounded-full text-fg/75 transition-colors duration-200 hover:text-accent hover:bg-secondary/60"
               >
-                <Icon />
-                
-                {/* Tooltip */}
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-fg text-bg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 pointer-events-none shadow-md">
-                  {link.label}
-                </span>
+                <Icon className="text-lg" />
               </a>
             );
           })}
-          
-          {/* Dark/Light Mode Toggle */}
+
           <button
             onClick={toggleDarkMode}
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className={`relative group text-fg hover:text-accent focus:outline-none transition-all duration-300 hover:scale-125 hover:-translate-y-1 ml-2 ${
-              mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-            }`}
-            style={{ transitionDelay: `${(navLinks.length + socialLinks.length + 1) * 75}ms` }}
+            className="ml-1 flex h-9 w-9 items-center justify-center rounded-full text-fg/75 transition-colors duration-200 hover:text-accent hover:bg-secondary/60"
           >
-            {darkMode ? <FiSun className="text-xl" /> : <FiMoon className="text-xl" />}
-            
-            {/* Tooltip */}
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-fg text-bg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 pointer-events-none shadow-md">
-              {darkMode ? 'Light' : 'Dark'}
-            </span>
+            {darkMode ? <FiSun className="text-lg" /> : <FiMoon className="text-lg" />}
           </button>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="lg:hidden flex items-center gap-4">
+        {/* Mobile controls */}
+        <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={toggleDarkMode}
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className="text-fg hover:text-accent focus:outline-none transition-colors duration-200 text-2xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-fg/80 transition-colors duration-200 hover:text-accent hover:bg-secondary/60"
           >
-            {darkMode ? <FiSun /> : <FiMoon />}
+            {darkMode ? <FiSun className="text-xl" /> : <FiMoon className="text-xl" />}
           </button>
           <button
             ref={hamburgerRef}
@@ -242,86 +192,66 @@ const Navbar = () => {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="text-fg hover:text-accent focus:outline-none transition-colors duration-200 text-2xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-fg/80 transition-colors duration-200 hover:text-accent hover:bg-secondary/60"
           >
-            {menuOpen ? <FiX /> : <FiMenu />}
+            {menuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <div 
+        <div
           id="mobile-menu"
           ref={dropdownRef}
           role="menu"
-          className="absolute top-full right-4 mt-2 w-64 z-[101] lg:hidden bg-secondary rounded-xl shadow-xl border border-border overflow-hidden"
-          style={{
-            animation: 'dropdown-enter 0.2s ease-out'
-          }}
+          className="absolute right-4 top-[calc(100%+4px)] w-64 overflow-hidden rounded-2xl border border-border bg-secondary shadow-2xl lg:hidden"
+          style={{ animation: "dropdown-enter 0.2s ease-out" }}
         >
-            {/* Navigation Links */}
-            <nav className="py-2" aria-label="Mobile navigation">
-              {navLinks.map((link) => (
+          <nav className="py-2" aria-label="Mobile navigation">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
                 <a
                   key={link.name}
                   role="menuitem"
                   href={link.href}
-                  className={`block px-5 py-3 text-base font-medium transition-colors duration-150 ${
-                    activeSection === link.href.substring(1)
-                      ? "text-accent bg-accent/10"
-                      : "text-fg hover:text-accent hover:bg-accent/5"
+                  className={`block px-5 py-3 text-sm font-medium transition-colors duration-150 ${
+                    isActive
+                      ? "bg-accent/10 text-accent"
+                      : "text-fg hover:bg-accent/5 hover:text-accent"
                   }`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.name}
                 </a>
-              ))}
-            </nav>
+              );
+            })}
+          </nav>
 
-            {/* Divider */}
-            <div className="h-px bg-border mx-4"></div>
-            
-            {/* Social Links */}
-            <div className="flex items-center justify-center gap-5 py-4">
-              {socialLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.label}
-                    className="text-fg hover:text-accent transition-colors duration-150 text-xl"
-                    onClick={() => {
-                      trackSocialClick(link.label);
-                      setMenuOpen(false);
-                    }}
-                  >
-                    <Icon />
-                  </a>
-                );
-              })}
-            </div>
+          <div className="mx-4 h-px bg-border" />
 
-            {/* Divider */}
-            <div className="h-px bg-border mx-4"></div>
-            
-            {/* Theme toggle */}
-            <div className="py-2">
-              <button
-                onClick={() => {
-                  toggleDarkMode();
-                  setMenuOpen(false);
-                }}
-                className="flex items-center gap-3 w-full px-5 py-3 text-fg hover:text-accent hover:bg-accent/5 transition-colors duration-150"
-              >
-                {darkMode ? <FiSun className="text-xl" /> : <FiMoon className="text-xl" />}
-                <span className="font-medium">{darkMode ? "Light Mode" : "Dark Mode"}</span>
-              </button>
-            </div>
+          <div className="flex items-center justify-center gap-4 py-4">
+            {socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  onClick={() => {
+                    trackSocialClick(link.label);
+                    setMenuOpen(false);
+                  }}
+                  className="text-fg/80 transition-colors duration-150 hover:text-accent text-xl"
+                >
+                  <Icon />
+                </a>
+              );
+            })}
           </div>
+        </div>
       )}
     </nav>
   );

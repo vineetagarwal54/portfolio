@@ -77,52 +77,97 @@
   transition: all 0.3s ease;
 }
 
-/* Spacing utilities for consistent vertical rhythm */
-.section-spacing {
-  margin-top: clamp(4rem, 8vw, 8rem);
-  margin-bottom: clamp(4rem, 8vw, 8rem);
-}
-
-.section-spacing-sm {
-  margin-top: clamp(2rem, 4vw, 4rem);
-  margin-bottom: clamp(2rem, 4vw, 4rem);
-}
-
-/* Container max-widths for different sections */
-.container {
+/* Shell: single source of truth for horizontal padding + max width */
+.shell {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  max-width: 80rem; /* 1280px */
 }
 
 @media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
+  .shell {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-    padding-left: 2rem;
-    padding-right: 2rem;
+  .shell {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
+@media (min-width: 1536px) {
+  .shell {
+    max-width: 84rem; /* 1344px – prevents content from feeling cramped on ultrawides */
   }
+}
+
+/* Section: consistent vertical rhythm between sections */
+.section {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.section-tight {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Section heading block: kicker + title + optional description */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .section-kicker { font-size: 0.8125rem; }
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--fg-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-lede {
+  margin: 1rem auto 0;
+  max-width: 48rem;
+  color: color-mix(in srgb, var(--fg-primary) 75%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  .section-lede { font-size: 1rem; }
+}
+
+/* Soft section divider — use sparingly for rhythm between neighbouring sections */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border),
+    transparent
+  );
+  opacity: 0.6;
 }
 
 /* Technology brand colors (use these classes on icons) */
@@ -242,25 +287,19 @@ html, body { background: var(--bg); color: var(--fg); }
   font-weight: 700;
 }
 
-/* Ensure gradient headings don't fade or clip */
-h1, h2, h3 {
-  .bg-gradient-to-r {
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-  
-  span[class*="bg-gradient"] {
-    background-size: 100% 100% !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    color: transparent !important;
-    display: inline-block !important;
-    /* Prevent text clipping for descenders */
-    padding-top: 2px !important;
-    padding-bottom: 4px !important;
-    line-height: 1.2 !important;
-  }
+/* Gradient heading helper — kept for any leftover usage */
+h1 span[class*="bg-gradient"],
+h2 span[class*="bg-gradient"],
+h3 span[class*="bg-gradient"] {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding-bottom: 2px;
+  line-height: 1.2;
 }
 
 .image-shimmer {

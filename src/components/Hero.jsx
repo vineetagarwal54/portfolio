@@ -10,24 +10,24 @@ import { HiDownload } from "react-icons/hi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const containerVariants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
       duration: 0.45,
       ease: [0.25, 0.1, 0.25, 1],
-      staggerChildren: 0.12,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const childVariants = {
-  hidden: { opacity: 0, x: -24 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
@@ -46,7 +46,6 @@ const Hero = () => {
     const downloadToast = toast.loading("Downloading...");
     try {
       setDownloading(true);
-
       try {
         const link = document.createElement("a");
         link.href = "/Resume1.pdf";
@@ -60,10 +59,7 @@ const Hero = () => {
       }
 
       setDownloading(false);
-      toast.success("Resume downloaded!", {
-        id: downloadToast,
-        duration: 2000,
-      });
+      toast.success("Resume downloaded!", { id: downloadToast, duration: 2000 });
 
       trackResumeDownload().catch((err) => {
         console.error("Analytics tracking failed:", err);
@@ -76,138 +72,129 @@ const Hero = () => {
   };
 
   return (
-<section className="w-full lg:py-0">
-  <div className="flex flex-col-reverse items-center gap-12 lg:flex-row lg:justify-between">      
+    <div className="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-12">
       <motion.div
-          className="w-full lg:w-3/5"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+        className="order-2 lg:order-1 lg:col-span-7"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.p
+          variants={childVariants}
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-accent sm:text-sm"
         >
-          <motion.p
-            variants={childVariants}
-            className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-accent"
-          >
-            Software Engineer
-          </motion.p>
+          Software Engineer
+        </motion.p>
 
-          <motion.h1
-            variants={childVariants}
-            className="mb-3 text-4xl font-bold tracking-tight text-fg sm:text-5xl lg:text-6xl"
-          >
-            Vineet Agarwal
-          </motion.h1>
+        <motion.h1
+          variants={childVariants}
+          className="mb-4 text-4xl font-bold leading-[1.05] tracking-tight text-fg sm:text-5xl lg:text-[4rem]"
+        >
+          Vineet Agarwal
+        </motion.h1>
 
-          <motion.div
-            variants={childVariants}
-            className="mb-6 text-xl font-semibold text-fg/80 sm:text-2xl"
-          >
-            <TypeAnimation
-              sequence={[
-                "Full-Stack Developer",
-                1500,
-                "AI Engineer",
-                1500,
-                "Frontend + Backend Builder",
-                1500,
-                "Cloud-Native Problem Solver",
-                1500,
-              ]}
-              wrapper="span"
-              speed={42}
-              repeat={Infinity}
-            />
-          </motion.div>
+        <motion.div
+          variants={childVariants}
+          className="mb-6 min-h-[2.25rem] text-xl font-medium text-fg/80 sm:text-2xl"
+        >
+          <TypeAnimation
+            sequence={[
+              "Full-Stack Developer",
+              1500,
+              "AI Engineer",
+              1500,
+              "Frontend + Backend Builder",
+              1500,
+              "Cloud-Native Problem Solver",
+              1500,
+            ]}
+            wrapper="span"
+            speed={42}
+            repeat={Infinity}
+          />
+        </motion.div>
 
-          <motion.p
-            variants={childVariants}
-            className="max-w-3xl text-base leading-8 text-fg/80 sm:text-lg"
-          >
-            {HERO_CONTENT}
-          </motion.p>
+        <motion.p
+          variants={childVariants}
+          className="max-w-2xl text-base leading-[1.75] text-fg/70 sm:text-lg"
+        >
+          {HERO_CONTENT}
+        </motion.p>
 
-          <motion.div
-            variants={childVariants}
-            className="mt-6 flex flex-wrap gap-3"
-          >
-            {focusAreas.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-fg/85"
-              >
-                {item}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.div
-            variants={childVariants}
-            className="mt-8 flex flex-wrap gap-4"
-          >
-            <motion.button
-              onClick={handleDownload}
-              className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-accent-foreground shadow-md transition-colors duration-200 hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent-ring"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              animate={
-                downloading
-                  ? {
-                      scale: [1, 0.98, 1],
-                      transition: { duration: 0.6, repeat: Infinity },
-                    }
-                  : {}
-              }
+        <motion.div
+          variants={childVariants}
+          className="mt-7 flex flex-wrap gap-2 sm:gap-2.5"
+        >
+          {focusAreas.map((item) => (
+            <span
+              key={item}
+              className="rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-fg/75 sm:text-sm"
             >
-              {downloading ? (
-                <>
-                  <AiOutlineLoading3Quarters className="animate-spin text-lg" />
-                  Downloading...
-                </>
-              ) : (
-                <>
-                  <HiDownload className="text-lg" />
-                  Download Resume
-                </>
-              )}
-            </motion.button>
-
-            <motion.a
-              href="#projects"
-              className="rounded-full border border-border px-6 py-3 text-base font-semibold text-fg transition-colors duration-200 hover:bg-card"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Projects
-            </motion.a>
-
-            <motion.a
-              href="#contact"
-              className="rounded-full border border-border px-6 py-3 text-base font-semibold text-fg transition-colors duration-200 hover:bg-card"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get In Touch
-            </motion.a>
-          </motion.div>
+              {item}
+            </span>
+          ))}
         </motion.div>
 
         <motion.div
-          className="flex w-full justify-center lg:w-2/5"
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.15 }}
+          variants={childVariants}
+          className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
         >
-          <div className="relative">
-            <div className="absolute inset-0 rounded-3xl bg-accent/10 blur-2xl" />
+          <motion.button
+            onClick={handleDownload}
+            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground shadow-md transition-colors duration-200 hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent-ring sm:text-base"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {downloading ? (
+              <>
+                <AiOutlineLoading3Quarters className="animate-spin text-lg" />
+                Downloading...
+              </>
+            ) : (
+              <>
+                <HiDownload className="text-lg" />
+                Download Resume
+              </>
+            )}
+          </motion.button>
+
+          <a
+            href="#projects"
+            className="inline-flex items-center rounded-full border border-border bg-bg px-6 py-3 text-sm font-semibold text-fg transition-colors duration-200 hover:border-accent hover:text-accent sm:text-base"
+          >
+            View Projects
+          </a>
+
+          <a
+            href="#contact"
+            className="inline-flex items-center rounded-full px-4 py-3 text-sm font-semibold text-fg/75 transition-colors duration-200 hover:text-accent sm:text-base"
+          >
+            Get in touch →
+          </a>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="order-1 flex justify-center lg:order-2 lg:col-span-5 lg:justify-end"
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+      >
+        <div className="relative">
+          <div
+            aria-hidden
+            className="absolute -inset-6 -z-10 rounded-[2rem] bg-accent/15 blur-3xl"
+          />
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-border bg-card p-1.5 shadow-xl">
             <OptimizedImage
               src={profilePi}
               alt="Vineet Agarwal"
-              className="relative h-72 w-72 rounded-3xl object-cover shadow-2xl sm:h-80 sm:w-80 lg:h-96 lg:w-96"
+              className="h-64 w-64 rounded-[1.4rem] object-cover sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]"
             />
           </div>
-        </motion.div>
-      </div>
-    </section>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

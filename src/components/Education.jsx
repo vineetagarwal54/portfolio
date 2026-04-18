@@ -54,14 +54,12 @@ import OptimizedImage from './OptimizedImage';
   
   const Education = () => {
     return (
-      <div className="pb-4">
-        <div className="mt-16 flex flex-col">
-          <VerticalTimeline>
-            {education.map((education, index) => (
-              <EducationCard key={index} education={education} index={index} />
-            ))}
-          </VerticalTimeline>
-        </div>
+      <div className="mt-4 flex flex-col">
+        <VerticalTimeline>
+          {education.map((education, index) => (
+            <EducationCard key={index} education={education} index={index} />
+          ))}
+        </VerticalTimeline>
       </div>
     );
   };
