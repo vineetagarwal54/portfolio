@@ -8,7 +8,7 @@ import { trackSocialClick } from "../services/analytics";
 
 const socialLinks = [
   {
-    href: "https://www.linkedin.com/in/vineet-agarwal-540abc/",
+    href: "https://www.linkedin.com/in/vineetagarwal54/",
     label: "LinkedIn",
     icon: FaLinkedin,
   },

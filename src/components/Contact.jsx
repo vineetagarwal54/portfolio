@@ -140,7 +140,7 @@ const Contact = () => {
       icon: <RiLinkedinFill className="text-xl" />,
       label: "LinkedIn",
       value: "Connect with me",
-      link: "https://www.linkedin.com/in/vineet-agarwal-540abc/",
+      link: "https://www.linkedin.com/in/vineetagarwal54/",
     },
     {
       icon: <RiGithubFill className="text-xl" />,

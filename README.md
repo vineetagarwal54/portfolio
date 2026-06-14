@@ -76,6 +76,6 @@ npm run lint     # Run ESLint
 ## 👨‍💻 Author
 
 **Vineet Agarwal**
-- LinkedIn: [@vineet-agarwal-540abc](https://www.linkedin.com/in/vineet-agarwal-540abc/)
+- LinkedIn: [@vineetagarwal54](https://www.linkedin.com/in/vineetagarwal54/)
 - GitHub: [@vineetagarwal54](https://github.com/vineetagarwal54)
 - Email: vineetagarwal540@gmail.com
