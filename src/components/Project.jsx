@@ -20,7 +20,7 @@ const cardVariants = {
   }),
 };
 
-const ProjectCard = ({ index, name, description, tags, image, source_code_link }) => (
+const ProjectCard = ({ index, name, description, tags, image, image_webp, source_code_link }) => (
   <motion.article
     custom={index}
     variants={cardVariants}
@@ -40,9 +40,11 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
     >
       <OptimizedImage
         src={image}
-        alt={name}
+        webpSrc={image_webp}
+        alt={`${name} project preview`}
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        lazy={true}
+        width={640}
+        height={400}
         priority={index < 2}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -66,7 +68,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
           {tags.map((tag) => (
             <span
               key={tag.name}
-              className="rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-medium text-fg/70"
+              className="rounded-full border border-accent/25 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent-strong"
             >
               {tag.name}
             </span>
@@ -78,7 +80,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackProjectClick(name)}
-          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent-hover"
+          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:underline"
         >
           View source
           <FiArrowUpRight className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

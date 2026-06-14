@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import logoWebp from "../assets/logo.webp";
 import { trackSocialClick } from "../services/analytics";
 
 const socialLinks = [
@@ -122,11 +123,17 @@ const Navbar = () => {
     >
       <div className="shell flex h-[72px] items-center justify-between">
         <a href="#home" aria-label="Home" className="flex items-center">
-          <img
-            src={logo}
-            className="h-9 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-10"
-            alt="logo"
-          />
+          <picture>
+            <source srcSet={logoWebp} type="image/webp" />
+            <img
+              src={logo}
+              className="h-9 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-10"
+              alt="Vineet Agarwal logo"
+              width={40}
+              height={40}
+              decoding="async"
+            />
+          </picture>
         </a>
 
         {/* Desktop nav */}

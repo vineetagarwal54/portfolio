@@ -24,10 +24,12 @@ const ExperienceCard = ({ experience, index }) => (
         >
           <OptimizedImage
             src={experience.icon}
-            alt={experience.company_name}
+            webpSrc={experience.icon_webp}
+            alt={`${experience.company_name} logo`}
             className="w-[100%] h-[100%] object-contain rounded-full"
-            priority={index < 2} // Prioritize first 2 experience images
-            lazy={index >= 2}
+            width={48}
+            height={48}
+            priority={index < 2}
           />
         </a>
       </div>

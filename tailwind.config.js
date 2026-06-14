@@ -16,6 +16,7 @@ export default {
         muted: 'var(--fg-secondary)',
         border: 'var(--border)',
         accent: 'var(--accent)',
+        'accent-strong': 'var(--accent-strong)',
         'accent-secondary': 'var(--accent-secondary)',
         'accent-foreground': 'var(--accent-foreground)',
         'accent-hover': 'var(--accent-hover)',

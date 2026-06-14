@@ -149,8 +149,8 @@ const Technologies = () => {
         </h2>
         <p className="section-lede">
           I work across frontend interfaces, backend systems, AI workflows,
-          infrastructure, and real-time applications — a broad stack for the
-          full-stack, backend, frontend, mobile, cloud, and applied AI roles I'm
+          infrastructure, and real time applications, a broad stack for the
+          full stack, backend, frontend, mobile, cloud, and applied AI roles I'm
           targeting.
         </p>
       </div>

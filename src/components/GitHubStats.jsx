@@ -11,9 +11,9 @@ const StatsFallback = ({ title, children }) => (
   </div>
 );
 
-const StatsImage = ({ src, alt, className, fallbackTitle }) => {
+const StatsImage = ({ src, alt, className, fallbackTitle, width, height }) => {
   const [hasError, setHasError] = useState(false);
-  
+
   if (hasError) {
     return (
       <StatsFallback title={fallbackTitle}>
@@ -38,7 +38,10 @@ const StatsImage = ({ src, alt, className, fallbackTitle }) => {
       src={src}
       alt={alt}
       className={className}
+      width={width}
+      height={height}
       loading="lazy"
+      decoding="async"
       onError={() => setHasError(true)}
     />
   );
@@ -65,8 +68,10 @@ const GitHubStats = () => {
           >
             <StatsImage
               src={`https://github-readme-stats-eight-theta.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=transparent&hide_border=true&title_color=ff9800&icon_color=ff9800&text_color=9ca3af&bg_color=00000000`}
-              alt="GitHub Stats"
+              alt="Vineet Agarwal GitHub statistics summary"
               className="w-full max-w-[480px]"
+              width={480}
+              height={195}
               fallbackTitle="GitHub Stats"
             />
           </a>
@@ -79,8 +84,10 @@ const GitHubStats = () => {
           >
             <StatsImage
               src={`https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=${GITHUB_USERNAME}&layout=compact&theme=transparent&hide_border=true&title_color=ff9800&text_color=9ca3af&bg_color=00000000`}
-              alt="Top Languages"
+              alt="Most used programming languages on GitHub"
               className="w-full max-w-[480px]"
+              width={480}
+              height={195}
               fallbackTitle="Top Languages"
             />
           </a>
@@ -94,8 +101,10 @@ const GitHubStats = () => {
         >
           <StatsImage
             src={`https://streak-stats.demolab.com/?user=${GITHUB_USERNAME}&theme=transparent&hide_border=true&ring=ff9800&fire=ff9800&currStreakLabel=ff9800&sideLabels=9ca3af&currStreakNum=9ca3af&sideNums=9ca3af&dates=6b7280&background=00000000`}
-            alt="GitHub Streak"
+            alt="GitHub contribution streak"
             className="w-full max-w-[720px]"
+            width={720}
+            height={200}
             fallbackTitle="GitHub Streak"
           />
         </a>

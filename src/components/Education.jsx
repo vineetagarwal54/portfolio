@@ -24,10 +24,12 @@ import OptimizedImage from './OptimizedImage';
           >
             <OptimizedImage
               src={education.icon}
-              alt={education.company_name}
+              webpSrc={education.icon_webp}
+              alt={`${education.company_name} logo`}
               className="w-[100%] h-[100%] object-contain rounded-full"
-              priority={index < 2} // Prioritize first 2 education images
-              lazy={index >= 2}
+              width={48}
+              height={48}
+              priority={index < 2}
             />
           </a>
         </div>

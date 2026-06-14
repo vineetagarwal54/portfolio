@@ -1,23 +1,31 @@
-import { useState } from "react";
-import Experience from "./components/Experience";
+import { useState, lazy, Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import ImagePreloader from "./components/ImagePreloader";
-import Project from "./components/Project";
 import Technologies from "./components/Technologies";
-import Education from "./components/Education";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import SEO from "./components/SEO";
-import GitHubStats from "./components/GitHubStats";
 import { Toaster } from "react-hot-toast";
+
+// Below the fold sections are code split so they do not weigh down the first paint.
+// The vertical timeline library in particular is heavy, so Experience and Education load on demand.
+const Experience = lazy(() => import("./components/Experience"));
+const Education = lazy(() => import("./components/Education"));
+const Project = lazy(() => import("./components/Project"));
+const GitHubStats = lazy(() => import("./components/GitHubStats"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+
+// Reserves vertical space while a lazy section loads, keeping layout shift minimal.
+const SectionFallback = () => (
+  <div className="shell py-20" aria-hidden="true">
+    <div className="mx-auto h-40 w-full max-w-3xl animate-pulse rounded-2xl bg-card/60" />
+  </div>
+);
 
 const App = () => {
   const [selectedSection, setSelectedSection] = useState("experience");
 
   return (
     <>
-      <SEO />
       <ImagePreloader />
       <Toaster position="top-center" />
 
@@ -81,33 +89,43 @@ const App = () => {
                 </button>
               </div>
 
-              {selectedSection === "experience" ? <Experience /> : <Education />}
+              <Suspense fallback={<SectionFallback />}>
+                {selectedSection === "experience" ? <Experience /> : <Education />}
+              </Suspense>
             </div>
           </section>
 
           {/* Projects */}
           <section id="projects" className="section bg-bg-alt">
             <div className="shell">
-              <Project />
+              <Suspense fallback={<SectionFallback />}>
+                <Project />
+              </Suspense>
             </div>
           </section>
 
           {/* GitHub Activity */}
           <section id="github" className="section">
             <div className="shell">
-              <GitHubStats />
+              <Suspense fallback={<SectionFallback />}>
+                <GitHubStats />
+              </Suspense>
             </div>
           </section>
 
           {/* Contact */}
           <section id="contact" className="section bg-bg-alt">
             <div className="shell">
-              <Contact />
+              <Suspense fallback={<SectionFallback />}>
+                <Contact />
+              </Suspense>
             </div>
           </section>
         </main>
 
-        <Footer />
+        <Suspense fallback={<SectionFallback />}>
+          <Footer />
+        </Suspense>
       </div>
     </>
   );

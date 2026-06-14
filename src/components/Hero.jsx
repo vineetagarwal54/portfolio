@@ -1,4 +1,5 @@
 import profilePi from "../assets/pho1.png";
+import profilePiWebp from "../assets/pho1.webp";
 import { HERO_CONTENT } from "../constants";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -188,8 +189,12 @@ const Hero = () => {
           <div className="relative overflow-hidden rounded-[1.75rem] border border-border bg-card p-1.5 shadow-xl">
             <OptimizedImage
               src={profilePi}
-              alt="Vineet Agarwal"
+              webpSrc={profilePiWebp}
+              alt="Portrait of Vineet Agarwal"
               className="h-64 w-64 rounded-[1.4rem] object-cover sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]"
+              width={352}
+              height={352}
+              priority
             />
           </div>
         </div>
